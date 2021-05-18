@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "708739904997",
+    "project_id": "happiness-captured",
+    "storage_bucket": "happiness-captured.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708739904997:android:527684feb93508f9baeb0c",
+        "android_client_info": {
+          "package_name": "com.example.sos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "708739904997-q455ir34aqu7t276bnglhkuubf954gim.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHew6jOvAC3j18cWBTjj-2hpTspoHl9AQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "708739904997-q455ir34aqu7t276bnglhkuubf954gim.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "708739904997-lnj9bnjcj89m2c4r35d75vlv91lqifd2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.amigos.sos"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
