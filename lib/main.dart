@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'signin.dart';
+import 'package:sos/signin.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
