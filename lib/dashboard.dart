@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sos/drawerpage.dart';
 import 'package:sos/requestAccepted.dart';
 import 'request.dart';
 import 'package:geolocator/geolocator.dart';
@@ -29,7 +30,7 @@ class _DashboardState extends State<Dashboard> {
 
   void getCurrentUser() async {
     try {
-      final user = await _auth.currentUser;
+      final user =  _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
       }
@@ -103,7 +104,8 @@ class _DashboardState extends State<Dashboard> {
     //       .then((doc) => doc.data()['name']);
     // });
 
-    return Scaffold(
+    return Scaffold(drawer: DrawerPage(),
+       
       // drawer: Drawer(
       //   child: ListView(
       //     children: [
@@ -260,6 +262,7 @@ class _DashboardState extends State<Dashboard> {
                       'longitude': position.longitude,
                     });
                   } else {
+                    // ignore: unused_local_variable
                     LocationPermission permission =
                         await Geolocator.requestPermission();
                   }
