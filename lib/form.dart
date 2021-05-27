@@ -6,7 +6,6 @@ import 'package:sos/posthistory.dart';
 import 'package:flutter/widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 class FormPage extends StatefulWidget {
   @override
   _FormPageState createState() => _FormPageState();
@@ -14,10 +13,7 @@ class FormPage extends StatefulWidget {
 
 class _FormPageState extends State<FormPage> {
   final CollectionReference formData =
-  FirebaseFirestore.instance.collection('formData');
-
-
-
+      FirebaseFirestore.instance.collection('formData');
 
   String mobileNo;
   String state;
@@ -38,7 +34,6 @@ class _FormPageState extends State<FormPage> {
   ];
 
   String _selectedmedicines;
-
 
   @override
   Widget build(BuildContext context) {
@@ -214,21 +209,17 @@ class _FormPageState extends State<FormPage> {
                     height: 25.0,
                   ),
                   TextField(
-
-
                     onChanged: (text) {
-                      if(text == null || text.isEmpty){
+                      if (text == null || text.isEmpty) {
                         return 'enter valid data';
                       }
                       description = text;
                     },
                     decoration: InputDecoration(
-
                         floatingLabelBehavior: FloatingLabelBehavior.always,
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15.0)),
                         hintText: 'if others then please mention here',
-
                         labelText: 'Description',
                         labelStyle: TextStyle(
                           color: Colors.red,
@@ -256,12 +247,10 @@ class _FormPageState extends State<FormPage> {
                           'mobileNo': mobileNo,
                           'State': state,
                           'city': city,
-                          'selectedMedicine':_selectedmedicines,
-                          'hospitalName':hospitalName,
+                          'selectedMedicine': _selectedmedicines,
+                          'hospitalName': hospitalName,
                           'description': description
-
                         });
-
                         Navigator.push(
                             context,
                             MaterialPageRoute(

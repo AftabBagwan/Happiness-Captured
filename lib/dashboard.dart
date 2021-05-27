@@ -30,11 +30,10 @@ class _DashboardState extends State<Dashboard> {
 
   void getCurrentUser() async {
     try {
-      final user =  _auth.currentUser;
+      final user = _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
       }
-
       var data = loggedInUser.email;
       name = await _firestore
           .collection('database')
@@ -51,114 +50,10 @@ class _DashboardState extends State<Dashboard> {
     }
   }
 
-  // Future getUserData() async {
-  //   QuerySnapshot qn = await _firestore.collection("database").get();
-  //   // .doc("$uid")
-  //   // .get()
-  //   // .then((doc) => doc.data()['name']);
-  //   return qn.docs;
-  // }
-
-  // void getName() async {
-  //   var uid = loggedInUser.email;
-  //   final name = await _firestore
-  //       .collection('database')
-  //       .doc("$uid")
-  //       .get()
-  //       .then((doc) => doc.data()['name']);
-  // }
-
-  // void getUsername() async {
-  //   var data = await loggedInUser.uid;
-  //   name = await _firestore
-  //       .collection('database')
-  //       .doc('$data')
-  //       .get()
-  //       .then((doc) => doc.data()['name']);
-  // }
-
   @override
   Widget build(BuildContext context) {
-    // var uid = loggedInUser.email;
-    // var uid = loggedInUser.email;
-    // Future name = _firestore
-    //     .collection('database')
-    //     .doc("$uid")
-    //     .get()
-    //     .then((doc) => doc.data()['name']);
-
-    // var name = ()async {
-    //    var uid = loggedInUser.email;
-    //     await _firestore
-    //        .collection('database')
-    //        .doc("$uid")
-    //        .get()
-    //        .then((doc) => doc.data()['name']);
-    //  }
-
-    // setState(() async {
-    //   name = await _firestore
-    //       .collection('database')
-    //       .doc(loggedInUser.email)
-    //       .get()
-    //       .then((doc) => doc.data()['name']);
-    // });
-
-    return Scaffold(drawer: DrawerPage(),
-       
-      // drawer: Drawer(
-      //   child: ListView(
-      //     children: [
-      //       Container(
-      //         height: MediaQuery.of(context).size.width,
-      //         color: Colors.red,
-      //         child: Column(
-      //           children: [ListTile()],
-      //         ),
-      //       )
-      //     ],
-      //   ),
-      // ),
-      // drawer: Drawer(
-      //   child: ListView(
-      //     children: [
-      //       Container(
-      //         child: DrawerHeader(
-      //           decoration: BoxDecoration(
-      //             color: Colors.white,
-      //           ),
-      //
-      //     child: Column(
-      //       crossAxisAlignment: CrossAxisAlignment.start,
-      //       children: [
-      //         Text(
-      //           'Welcome,',
-      //           style: TextStyle(
-      //             fontStyle: FontStyle.italic,
-      //             fontWeight: FontWeight.bold,
-      //             fontSize: 25,
-      //           ),
-      //         ),
-      //         Text(
-      //           '$uid',
-      //           style: TextStyle(
-      //             fontSize: 20,
-      //             fontWeight: FontWeight.bold,
-      //             fontStyle: FontStyle.italic,
-      //             color: Color(0xfff12d4e),
-      //           ),
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
-      // Container(
-      //   height: MediaQuery.of(context).size.width,
-      //   color: Color(0xfff12d4e),
-      // )
-      // ],
-      // ),
-      // ),
+    return Scaffold(
+      drawer: DrawerPage(),
       backgroundColor: hasBeenPressed ? Color(0xfff85c4d) : Colors.white,
       appBar: AppBar(
         backgroundColor: Color(0xfff12d4e),
@@ -172,26 +67,14 @@ class _DashboardState extends State<Dashboard> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            FloatingActionButton(
-              heroTag: 'requestAccepted',
-              backgroundColor: hasBeenPressed ? Colors.white : Colors.red,
-              // onPressed: onPressed
-              child: Icon(
+            ActionButton(
+              heroTag: 'RequestAcceptedPage',
+              hasBeenPressed: hasBeenPressed,
+              page: RequestAccepted(),
+              icon: Icon(
                 Icons.check,
                 color: hasBeenPressed ? Colors.red : Colors.white,
               ),
-              onPressed: () {
-                // print(await getName());
-                // print(name);
-                // print(await name.get().then((doc) => doc.data()['name']));
-                // Request().requestStream();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => RequestAccepted(),
-                  ),
-                );
-              },
             ),
             FloatingActionButton(
               heroTag: 'end',
@@ -207,23 +90,15 @@ class _DashboardState extends State<Dashboard> {
                 });
               },
             ),
-            FloatingActionButton(
-              heroTag: 'request',
-              backgroundColor: hasBeenPressed ? Colors.white : Colors.red,
-              // onPressed: onPressed
-              child: Icon(
+            ActionButton(
+              heroTag: 'requestPage',
+              hasBeenPressed: hasBeenPressed,
+              icon: Icon(
                 Icons.chat,
                 color: hasBeenPressed ? Colors.red : Colors.white,
               ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Request(),
-                  ),
-                );
-              },
-            ),
+              page: Request(),
+            )
           ],
         ),
       ),
@@ -307,6 +182,39 @@ class _DashboardState extends State<Dashboard> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class ActionButton extends StatelessWidget {
+  const ActionButton({
+    Key key,
+    @required this.hasBeenPressed,
+    this.icon,
+    this.page,
+    this.heroTag,
+  }) : super(key: key);
+
+  final bool hasBeenPressed;
+  final Icon icon;
+  final page;
+  final String heroTag;
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      heroTag: heroTag,
+      backgroundColor: hasBeenPressed ? Colors.white : Colors.red,
+      // onPressed: onPressed
+      child: icon,
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => page,
+          ),
+        );
+      },
     );
   }
 }

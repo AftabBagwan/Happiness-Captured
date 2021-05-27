@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sos/FlashScreen.dart';
 import 'package:sos/dashboard.dart';
 import 'package:sos/resetPass.dart';
 import 'signup.dart';
@@ -11,7 +12,7 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   final _auth = FirebaseAuth.instance;
-
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   String email;
   String password;
   var emailText;
@@ -20,6 +21,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       // resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -127,6 +129,15 @@ class _SignInState extends State<SignIn> {
                     color: Colors.red,
                     child: MaterialButton(
                       onPressed: () async {
+                        _scaffoldKey.currentState.showSnackBar(new SnackBar(
+                          duration: new Duration(seconds: 4),
+                          content: new Row(
+                            children: <Widget>[
+                              new CircularProgressIndicator(),
+                              new Text("  Signing-In...")
+                            ],
+                          ),
+                        ));
                         try {
                           final newUser =
                               await _auth.signInWithEmailAndPassword(
@@ -149,27 +160,6 @@ class _SignInState extends State<SignIn> {
                             });
                           }
                         }
-
-                        // try {
-                        //   final user = await _auth.signInWithEmailAndPassword(
-                        //       email: email, password: password);
-                        //   if (user != null) {
-                        //     // Navigator.pushNamed(context, Dashboard.id);
-                        //     Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //           builder: (context) => Dashboard()),
-                        //     );
-                        //   }
-                        // } catch (e) {
-                        //   print(e);
-                        // }
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => Dashboard(),
-                        //   ),
-                        // );
                       },
                       child: Text(
                         'Login',
