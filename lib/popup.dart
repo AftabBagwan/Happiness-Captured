@@ -3,14 +3,28 @@ import 'package:flutter/material.dart';
 import 'request.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class PopUp extends StatelessWidget {
-  final _firestore = FirebaseFirestore.instance;
+class PopUp extends StatefulWidget {
   String name;
   String address;
   String mobileNo;
+  String userEmail;
   var uid;
-  PopUp({Key key, @required this.name, this.address, this.mobileNo, this.uid})
+  PopUp(
+      {Key key,
+      @required this.name,
+      this.address,
+      this.mobileNo,
+      this.uid,
+      this.userEmail})
       : super(key: key);
+
+  @override
+  _PopUpState createState() => _PopUpState();
+}
+
+class _PopUpState extends State<PopUp> {
+  final _firestore = FirebaseFirestore.instance;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -20,7 +34,7 @@ class PopUp extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              name,
+              widget.name,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 30,
@@ -30,7 +44,7 @@ class PopUp extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Text(address,
+            Text(widget.address,
                 style: TextStyle(
                   fontSize: 15,
                   fontStyle: FontStyle.normal,
@@ -38,7 +52,7 @@ class PopUp extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Text(mobileNo,
+            Text(widget.mobileNo,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
@@ -80,8 +94,13 @@ class PopUp extends StatelessWidget {
                   ),
                   color: Colors.red,
                   onPressed: () {
-                    Navigator.pop(context);
-                    _firestore.collection('request').doc('$uid').delete();
+                    setState(() {
+                      Navigator.pop(context);
+                      _firestore
+                          .collection('deleted')
+                          .doc(widget.userEmail)
+                          .update({'${widget.uid}': ''});
+                    });
                   },
                 ),
               ],

@@ -6,8 +6,16 @@ import 'package:sos/requestAccepted.dart';
 import 'request.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoder/geocoder.dart';
+import 'package:uuid/uuid.dart';
+import 'package:uuid/uuid_util.dart';
 
 class Dashboard extends StatefulWidget {
+  const Dashboard({Key key, User user})
+      : _user = user,
+        super(key: key);
+
+  final User _user;
+
   @override
   _DashboardState createState() => _DashboardState();
 }
@@ -15,12 +23,14 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
+  var uuid = Uuid();
   User loggedInUser;
   int counter = 0;
   bool hasBeenPressed = false;
   String request;
   var name;
   var mobileNo;
+  var data;
 
   @override
   void initState() {
@@ -34,7 +44,7 @@ class _DashboardState extends State<Dashboard> {
       if (user != null) {
         loggedInUser = user;
       }
-      var data = loggedInUser.email;
+      data = loggedInUser.email;
       name = await _firestore
           .collection('database')
           .doc('$data')
@@ -49,6 +59,17 @@ class _DashboardState extends State<Dashboard> {
       print(e);
     }
   }
+
+  // Future dataUpdate() async {
+  //   return await _firestore.collection('database').doc(uid).get().then<dynamic>((DocumentSnapshot snapshot) async {
+  //     print(snapshot.data()['name']);
+  //     if(snapshot.data()['name'] == null){
+  //       print("No name exists");
+  //     }
+  //     else {
+  //       return snapshot.data()['name'];
+  //     }
+  //   });
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +118,9 @@ class _DashboardState extends State<Dashboard> {
                 Icons.chat,
                 color: hasBeenPressed ? Colors.red : Colors.white,
               ),
-              page: Request(),
+              page: Request(
+                uid: loggedInUser.email,
+              ),
             )
           ],
         ),
@@ -128,6 +151,65 @@ class _DashboardState extends State<Dashboard> {
                     var first = addresses.first;
                     print("${first.featureName} : ${first.addressLine}");
                     request = "${first.featureName} : ${first.addressLine}";
+
+                    // var batch = _firestore.batch();
+
+                    // batch.set(
+                    //     _firestore
+                    //         .collection('database')
+                    //         .doc()
+                    //         .collection('requests')
+                    //         .doc(),
+                    //     {
+                    //       'address': request,
+                    //       'sender': loggedInUser.email,
+                    //       'name': name,
+                    //       'mobile': mobileNo,
+                    //       'latitude': position.latitude,
+                    //       'longitude': position.longitude,
+                    //     });
+                    // batch.commit();
+                    //
+                    // var requests =
+                    //     _firestore.collection("database").doc("$data");
+
+                    // requests.update
+
+                    // requests.update({
+                    //   request1: firebase.firestore.FieldValue.arrayUnion("greater_virginia")
+                    // });
+
+                    // var docData = {
+                    //   [
+                    //     'address: $request',
+                    //     'sender: $loggedInUser.email',
+                    //     'name: $name',
+                    //     'mobile: $mobileNo',
+                    //     'latitude: $position.latitude',
+                    //     'longitude: $position.longitude',
+                    //   ]
+                    // };
+
+                    // var docData = {
+                    //   stringExample: "Hello world!",
+                    //   booleanExample: true,
+                    //   numberExample: 3.14159265,
+                    //   dateExample: firebase.firestore.Timestamp
+                    //       .fromDate(new Date("December 10, 1815")),
+                    //   arrayExample: [5, true, "hello"],
+                    //   nullExample: null,
+                    //   objectExample: {
+                    //     a: 5,
+                    //     b: {nested: "foo"}
+                    //   }
+                    // };
+
+                    // _firestore.collection("database").doc("$data").set(docData);
+                    // requests.update({
+                    //   request: FieldValue
+                    //       .arrayUnion("greater_virginia")
+                    // });
+
                     _firestore.collection('request').add({
                       'address': request,
                       'sender': loggedInUser.email,
@@ -136,6 +218,39 @@ class _DashboardState extends State<Dashboard> {
                       'latitude': position.latitude,
                       'longitude': position.longitude,
                     });
+
+                    // _firestore.collection(collectionPath).set({
+                    //   name: "Frank",
+                    //   favorites: { food: "Pizza", color: "Blue", subject: "recess" },
+                    //   age: 12
+                    // });
+
+                    // Batch wise update also field map
+                    // Future<void> batchUpdate() {
+                    //   WriteBatch batch = FirebaseFirestore.instance.batch();
+                    //   var v1 = uuid.v1();
+                    //   return _firestore
+                    //       .collection('request')
+                    //       .get()
+                    //       .then((querySnapshot) {
+                    //     querySnapshot.docs.forEach((document) {
+                    //       batch.update(document.reference, {
+                    //         '$v1': {
+                    //           'address': request,
+                    //           'sender': loggedInUser.email,
+                    //           'name': name,
+                    //           'mobile': mobileNo,
+                    //           'latitude': position.latitude,
+                    //           'longitude': position.longitude,
+                    //         }
+                    //       });
+                    //     });
+                    //
+                    //     return batch.commit();
+                    //   });
+                    // }
+
+                    // batchUpdate();
                   } else {
                     // ignore: unused_local_variable
                     LocationPermission permission =

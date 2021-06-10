@@ -157,6 +157,10 @@ class SignUp extends StatelessWidget {
                               'mobile': mobileNumber,
                               'name': name,
                             });
+                            _firestore
+                                .collection('request')
+                                .doc('$email')
+                                .set({});
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => SignIn()),

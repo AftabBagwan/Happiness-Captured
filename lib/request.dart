@@ -6,9 +6,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:sos/popup.dart';
 
 class Request extends StatelessWidget {
-  // Request({Key key, @required this.uid}) : super(key: key);
-  //
-  // final String uid;
+  Request({Key key, @required this.uid}) : super(key: key);
+
+  final String uid;
 
   @override
   final _firestore = FirebaseFirestore.instance;
@@ -78,6 +78,7 @@ class Request extends StatelessWidget {
                                   75.01306136879904) /
                               1000,
                           uid: request.id,
+                          userEmail: uid,
                           // name: uid,
                           // name: _firestore
                           //     .collection('database')
@@ -103,13 +104,15 @@ class NotificationUI extends StatelessWidget {
       this.name,
       this.mobileNo,
       this.distance,
-      this.uid});
+      this.uid,
+      this.userEmail});
   final sender;
   final address;
   final name;
   final mobileNo;
   final distance;
   final uid;
+  final userEmail;
 
   @override
   Widget build(BuildContext context) {
@@ -130,6 +133,7 @@ class NotificationUI extends StatelessWidget {
                   address: address,
                   mobileNo: mobileNo,
                   uid: uid,
+                  userEmail: userEmail,
                 );
               });
         },
