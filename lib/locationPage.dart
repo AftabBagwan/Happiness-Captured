@@ -4,6 +4,7 @@ import 'package:geocoder/geocoder.dart';
 import 'package:sos/dashboard.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sos/signin.dart';
 
 class LocationPage extends StatefulWidget {
   LocationPage({Key key, @required this.email}) : super(key: key);
@@ -132,7 +133,7 @@ class _LocationPageState extends State<LocationPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Dashboard(),
+                              builder: (context) => SignIn(),
                             ));
                         _firestore
                             .collection('database')
