@@ -143,8 +143,8 @@ class _DashboardState extends State<Dashboard> {
                         desiredAccuracy: LocationAccuracy.bestForNavigation);
                     print(position);
                     print(position2);
-                    final coordinates =
-                        new Coordinates(position.latitude, position.longitude);
+                    final coordinates = new Coordinates(
+                        position2.latitude, position2.longitude);
                     var addresses = await Geocoder.local
                         .findAddressesFromCoordinates(coordinates);
                     var first = addresses.first;
@@ -214,8 +214,8 @@ class _DashboardState extends State<Dashboard> {
                       'sender': loggedInUser.email,
                       'name': name,
                       'mobile': mobileNo,
-                      'latitude': position.latitude,
-                      'longitude': position.longitude,
+                      'latitude': position2.latitude,
+                      'longitude': position2.longitude,
                       "messageTime": DateTime.now(),
                     });
 
