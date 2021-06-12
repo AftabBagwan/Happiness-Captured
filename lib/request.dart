@@ -32,7 +32,10 @@ class Request extends StatelessWidget {
         child: Column(
           children: [
             StreamBuilder(
-                stream: _firestore.collection('request').snapshots(),
+                stream: _firestore
+                    .collection('request')
+                    .orderBy('messageTime', descending: false)
+                    .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (!snapshot.hasData) {

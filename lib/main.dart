@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: status == true ? SignIn() : Dashboard(),
+      home: status == false ? SignIn() : Dashboard(),
     );
   }
 }

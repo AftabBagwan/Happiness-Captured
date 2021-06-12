@@ -216,6 +216,7 @@ class _DashboardState extends State<Dashboard> {
                       'mobile': mobileNo,
                       'latitude': position.latitude,
                       'longitude': position.longitude,
+                      "messageTime": DateTime.now(),
                     });
 
                     // _firestore.collection(collectionPath).set({

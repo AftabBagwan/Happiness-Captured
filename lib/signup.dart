@@ -157,6 +157,7 @@ class SignUp extends StatelessWidget {
                               'email': email,
                               'mobile': mobileNumber,
                               'name': name,
+                              'time': DateTime.now(),
                             });
                             // _firestore
                             //     .collection('request')
