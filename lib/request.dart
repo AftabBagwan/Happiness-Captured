@@ -34,7 +34,7 @@ class Request extends StatelessWidget {
             StreamBuilder(
                 stream: _firestore
                     .collection('request')
-                    .orderBy('messageTime', descending: false)
+                    .orderBy('messageTime', descending: true)
                     .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {

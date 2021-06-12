@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'request.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:maps_launcher/maps_launcher.dart';
 
 class PopUp extends StatefulWidget {
   String name;
@@ -123,7 +124,10 @@ class _PopUpState extends State<PopUp> {
                 ],
               ),
               color: Colors.orange,
-              onPressed: () {},
+              onPressed: () {
+                MapsLauncher.launchCoordinates(
+                    37.4220041, -122.0862462, 'Google Headquarters are here');
+              },
             ),
           ],
         ),
