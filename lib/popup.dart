@@ -130,8 +130,7 @@ class _PopUpState extends State<PopUp> {
               ),
               color: Colors.orange,
               onPressed: () {
-                MapsLauncher.launchCoordinates(
-                    lat, long, 'Google Headquarters are here');
+                MapsLauncher.launchCoordinates(lat, long);
               },
             ),
           ],
