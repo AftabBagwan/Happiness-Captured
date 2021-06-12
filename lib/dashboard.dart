@@ -140,7 +140,7 @@ class _DashboardState extends State<Dashboard> {
                     hasBeenPressed = true;
                     Position position = await Geolocator.getLastKnownPosition();
                     Position position2 = await Geolocator.getCurrentPosition(
-                        desiredAccuracy: LocationAccuracy.high);
+                        desiredAccuracy: LocationAccuracy.bestForNavigation);
                     print(position);
                     print(position2);
                     final coordinates =
