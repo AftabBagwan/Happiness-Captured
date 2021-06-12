@@ -63,6 +63,8 @@ class Request extends StatelessWidget {
                               1000,
                           uid: request.id,
                           userEmail: uid,
+                          requestLatitude: request['latitude'],
+                          requestLongitude: request['longitude'],
                           // name: uid,
                           // name: _firestore
                           //     .collection('database')
@@ -89,7 +91,9 @@ class NotificationUI extends StatelessWidget {
       this.mobileNo,
       this.distance,
       this.uid,
-      this.userEmail});
+      this.userEmail,
+      this.requestLatitude,
+      this.requestLongitude});
   final sender;
   final address;
   final name;
@@ -97,6 +101,8 @@ class NotificationUI extends StatelessWidget {
   final distance;
   final uid;
   final userEmail;
+  final requestLatitude;
+  final requestLongitude;
 
   @override
   Widget build(BuildContext context) {
@@ -118,6 +124,7 @@ class NotificationUI extends StatelessWidget {
                   mobileNo: mobileNo,
                   uid: uid,
                   userEmail: userEmail,
+                  requestLatitude: requestLatitude,
                 );
               });
         },

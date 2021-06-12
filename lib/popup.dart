@@ -9,15 +9,19 @@ class PopUp extends StatefulWidget {
   String address;
   String mobileNo;
   String userEmail;
+  var requestLatitude;
+  var requestLongitude;
   var uid;
-  PopUp(
-      {Key key,
-      @required this.name,
-      this.address,
-      this.mobileNo,
-      this.uid,
-      this.userEmail})
-      : super(key: key);
+  PopUp({
+    Key key,
+    @required this.name,
+    this.address,
+    this.mobileNo,
+    this.uid,
+    this.userEmail,
+    this.requestLatitude,
+    this.requestLongitude,
+  }) : super(key: key);
 
   @override
   _PopUpState createState() => _PopUpState();
@@ -25,9 +29,10 @@ class PopUp extends StatefulWidget {
 
 class _PopUpState extends State<PopUp> {
   final _firestore = FirebaseFirestore.instance;
-
   @override
   Widget build(BuildContext context) {
+    var lat = widget.requestLatitude;
+    var long = widget.requestLongitude;
     return SingleChildScrollView(
       child: Container(
         height: 400,
@@ -126,7 +131,7 @@ class _PopUpState extends State<PopUp> {
               color: Colors.orange,
               onPressed: () {
                 MapsLauncher.launchCoordinates(
-                    37.4220041, -122.0862462, 'Google Headquarters are here');
+                    lat, long, 'Google Headquarters are here');
               },
             ),
           ],
