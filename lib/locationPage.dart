@@ -18,6 +18,7 @@ class LocationPage extends StatefulWidget {
 class _LocationPageState extends State<LocationPage> {
   _LocationPageState({@required this.userEmail});
   final String userEmail;
+  Position position;
 
   var finalAddress = '';
   final _firestore = FirebaseFirestore.instance;
@@ -89,7 +90,7 @@ class _LocationPageState extends State<LocationPage> {
                         ),
                       ),
                       onPressed: () async {
-                        Position position = await Geolocator.getCurrentPosition(
+                        position = await Geolocator.getCurrentPosition(
                             desiredAccuracy: LocationAccuracy.high);
                         final coordinates = new Coordinates(
                             position.latitude, position.longitude);
@@ -140,6 +141,8 @@ class _LocationPageState extends State<LocationPage> {
                             .doc('$userEmail')
                             .update({
                           'PrimaryAddress': finalAddress,
+                          'PrimaryLatitude': position.latitude,
+                          'PrimaryLongitude': position.longitude,
                         });
                       },
                     ),
