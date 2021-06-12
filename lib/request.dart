@@ -84,16 +84,18 @@ class Request extends StatelessWidget {
 }
 
 class NotificationUI extends StatelessWidget {
-  NotificationUI(
-      {this.sender,
-      this.address,
-      this.name,
-      this.mobileNo,
-      this.distance,
-      this.uid,
-      this.userEmail,
-      this.requestLatitude,
-      this.requestLongitude});
+  NotificationUI({
+    this.sender,
+    this.address,
+    this.name,
+    this.mobileNo,
+    this.distance,
+    this.uid,
+    this.userEmail,
+    this.requestLatitude,
+    this.requestLongitude,
+    this.requestAddress,
+  });
   final sender;
   final address;
   final name;
@@ -103,6 +105,7 @@ class NotificationUI extends StatelessWidget {
   final userEmail;
   final requestLatitude;
   final requestLongitude;
+  final requestAddress;
 
   @override
   Widget build(BuildContext context) {
@@ -125,6 +128,7 @@ class NotificationUI extends StatelessWidget {
                   uid: uid,
                   userEmail: userEmail,
                   requestLatitude: requestLatitude,
+                  requestLongitude: requestLongitude,
                 );
               });
         },

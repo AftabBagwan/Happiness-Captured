@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'request.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:maps_launcher/maps_launcher.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:geocoder/geocoder.dart';
 
 class PopUp extends StatefulWidget {
   String name;
@@ -33,6 +35,7 @@ class _PopUpState extends State<PopUp> {
   Widget build(BuildContext context) {
     var lat = widget.requestLatitude;
     var long = widget.requestLongitude;
+    // String address = ,
     return SingleChildScrollView(
       child: Container(
         height: 400,
