@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sos/form.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sos/signin.dart';
 
 class DrawerPage extends StatelessWidget {
   @override
@@ -36,6 +38,27 @@ class DrawerPage extends StatelessWidget {
           ListTile(
             title: Text('Settings'),
             onTap: () {
+              //Add the code for navigation
+            },
+          ),
+          ListTile(
+            title: Text('Log Out'),
+            onTap: () {
+              void logoutUser() async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs?.clear();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SignIn(),
+                    ));
+                // Navigator.pushAndRemoveUntil(
+                //     context,
+                //     ModalRoute.withName("/SplashScreen"),
+                //     ModalRoute.withName("/Home"));
+              }
+
+              logoutUser();
               //Add the code for navigation
             },
           ),

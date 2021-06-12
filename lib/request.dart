@@ -12,32 +12,13 @@ class Request extends StatelessWidget {
 
   @override
   final _firestore = FirebaseFirestore.instance;
-  // void getMessage() {
-  //   _firestore.collection('request').get().then((QuerySnapshot querySnapshot) {
-  //     querySnapshot.docs.forEach((doc) {
-  //       print(doc.data());
-  //     });
-  //   });
-  // }
-
-  // var uid;
-  //
-  // void requestStream() async {
-  //   await for (var snapshot in _firestore.collection('request').snapshots()) {
-  //     for (var request in snapshot.docs) {
-  //       print(request.data());
-  //       uid = request.id;
-  //     }
-  //   }
-  // }
-
-  // final _firestore = FirebaseFirestore.instance;
-  // void getMessage() async {
-  //   final request = await _firestore.collection('request').get();
-  //   for (var request in request.) {
-  //     print(request.data);
-  //   }
-  // }
+  void getMessage() {
+    _firestore.collection('request').get().then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        print(doc.data());
+      });
+    });
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(

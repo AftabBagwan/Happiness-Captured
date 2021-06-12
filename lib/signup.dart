@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sos/locationPage.dart';
 import 'signin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -157,13 +158,16 @@ class SignUp extends StatelessWidget {
                               'mobile': mobileNumber,
                               'name': name,
                             });
-                            _firestore
-                                .collection('request')
-                                .doc('$email')
-                                .set({});
+                            // _firestore
+                            //     .collection('request')
+                            //     .doc('$email')
+                            //     .set({});
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => SignIn()),
+                              MaterialPageRoute(
+                                  builder: (context) => LocationPage(
+                                        email: email,
+                                      )),
                             );
 
                             // _firestore

@@ -4,6 +4,7 @@ import 'package:sos/dashboard.dart';
 import 'package:sos/resetPass.dart';
 import 'signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -129,6 +130,9 @@ class _SignInState extends State<SignIn> {
                     color: Colors.red,
                     child: MaterialButton(
                       onPressed: () async {
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        prefs?.setBool("isLoggedIn", true);
                         _scaffoldKey.currentState.showSnackBar(new SnackBar(
                           duration: new Duration(seconds: 4),
                           content: new Row(

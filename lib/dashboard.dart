@@ -13,7 +13,6 @@ class Dashboard extends StatefulWidget {
   const Dashboard({Key key, User user})
       : _user = user,
         super(key: key);
-
   final User _user;
 
   @override
@@ -291,7 +290,7 @@ class _DashboardState extends State<Dashboard> {
           DashboardText(
             text: hasBeenPressed
                 ? 'Please standby, we are currently requesting for help.'
-                : 'After pressing the SOS button, we will contact the nearest person or volunteer !',
+                : 'After pressing the SOS button three times, we will contact the nearest person or volunteer !',
             color: hasBeenPressed ? Colors.white : Colors.red,
             // 'After pressing the SOS button, we will contact the nearest person or volunteer !',
           ),
