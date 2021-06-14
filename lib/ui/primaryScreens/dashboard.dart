@@ -8,6 +8,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:geocoder/geocoder.dart';
 import '../../components/actionButton.dart';
 import 'package:sos/components/dashboardText.dart';
+import 'package:uuid/uuid.dart';
 
 class Dashboard extends StatefulWidget {
   @override
