@@ -36,6 +36,7 @@ dependencies:
   shared_preferences: ^2.0.6
   maps_launcher: ^2.0.0
   csc_picker: ^0.2.5
+  uuid: ^3.0.4
 
 dev_dependencies:
   flutter_test:
