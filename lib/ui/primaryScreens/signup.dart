@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:sos/locationPage.dart';
+import 'locationPage.dart';
 import 'signin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignUp extends StatelessWidget {
   final _auth = FirebaseAuth.instance;
-  String email;
-  String password;
-  String name;
-  String mobileNumber;
-
   static const String id = 'signup';
   final _firestore = FirebaseFirestore.instance;
-
   @override
   Widget build(BuildContext context) {
+    String email;
+    String password;
+    String name;
+    String mobileNumber;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,

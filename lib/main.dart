@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sos/dashboard.dart';
-import 'package:sos/signin.dart';
+import 'package:sos/ui/primaryScreens/dashboard.dart';
+import 'package:sos/ui/primaryScreens/signin.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:sos/startup_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 var status;

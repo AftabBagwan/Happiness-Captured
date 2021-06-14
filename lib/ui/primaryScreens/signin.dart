@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sos/FlashScreen.dart';
-import 'package:sos/dashboard.dart';
-import 'package:sos/resetPass.dart';
+import 'package:sos/ui/primaryScreens/dashboard.dart';
+import 'package:sos/ui/primaryScreens/resetPass.dart';
 import 'signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,14 +11,13 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  @override
   final _auth = FirebaseAuth.instance;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   String email;
   String password;
   var emailText;
   var passwordText;
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
@@ -133,6 +131,7 @@ class _SignInState extends State<SignIn> {
                         SharedPreferences prefs =
                             await SharedPreferences.getInstance();
                         prefs?.setBool("isLoggedIn", true);
+                        // ignore: deprecated_member_use
                         _scaffoldKey.currentState.showSnackBar(new SnackBar(
                           duration: new Duration(seconds: 4),
                           content: new Row(

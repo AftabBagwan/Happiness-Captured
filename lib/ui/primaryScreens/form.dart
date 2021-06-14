@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sos/posthistory.dart';
 import 'package:flutter/widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:csc_picker/csc_picker.dart';
 
 class FormPage extends StatefulWidget {
   @override
@@ -16,11 +15,13 @@ class _FormPageState extends State<FormPage> {
       FirebaseFirestore.instance.collection('formData');
 
   String mobileNo;
-  String state;
-  String city;
   String age;
   String hospitalName;
   String description;
+  String stateValue;
+  String cityValue;
+  String countryValue;
+  String name;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -51,6 +52,24 @@ class _FormPageState extends State<FormPage> {
                 children: [
                   TextFormField(
                     onChanged: (text) {
+                      name = text;
+                    },
+                    decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.location_history),
+                        floatingLabelBehavior: FloatingLabelBehavior.always,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0)),
+                        hintText: 'Enter Your Name',
+                        labelText: 'Name',
+                        labelStyle: TextStyle(
+                          color: Colors.red,
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.w500,
+                        )),
+                  ),
+                  SizedBox(height: 25),
+                  TextFormField(
+                    onChanged: (text) {
                       mobileNo = text;
                     },
                     validator: (newValue) {
@@ -78,52 +97,48 @@ class _FormPageState extends State<FormPage> {
                   SizedBox(
                     height: 25.0,
                   ),
-                  TextFormField(
-                    onChanged: (text) {
-                      state = text;
+                  CSCPicker(
+                    showStates: true,
+                    showCities: true,
+                    flagState: CountryFlag.ENABLE,
+                    dropdownDecoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Colors.white,
+                        border: Border.all(color: Colors.grey, width: 1)),
+                    disabledDropdownDecoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Colors.grey.shade300,
+                        border: Border.all(color: Colors.grey, width: 1)),
+                    selectedItemStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                    ),
+                    dropdownHeadingStyle: TextStyle(
+                        color: Colors.black,
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold),
+                    dropdownItemStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                    ),
+                    dropdownDialogRadius: 10.0,
+                    searchBarRadius: 10.0,
+                    defaultCountry: DefaultCountry.India,
+                    onCountryChanged: (text) {
+                      setState(() {
+                        countryValue = text;
+                      });
                     },
-                    validator: (newValue) {
-                      if (newValue == null || newValue.isEmpty) {
-                        return 'Please Enter Valid data';
-                      }
-                      return null;
+                    onStateChanged: (text) {
+                      setState(() {
+                        stateValue = text;
+                      });
                     },
-                    decoration: InputDecoration(
-                        floatingLabelBehavior: FloatingLabelBehavior.always,
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
-                        hintText: 'Enter the State',
-                        labelText: 'State',
-                        labelStyle: TextStyle(
-                          color: Colors.red,
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w500,
-                        )),
-                  ),
-                  SizedBox(
-                    height: 25.0,
-                  ),
-                  TextFormField(
-                    onChanged: (text) {
-                      city = text;
+                    onCityChanged: (text) {
+                      setState(() {
+                        cityValue = text;
+                      });
                     },
-                    validator: (newValue) {
-                      if (newValue == null || newValue.isEmpty) {
-                        return 'Please Enter Valid data';
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                        floatingLabelBehavior: FloatingLabelBehavior.always,
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
-                        hintText: 'Enter the city',
-                        labelText: 'City',
-                        labelStyle: TextStyle(
-                          color: Colors.red,
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w500,
-                        )),
                   ),
                   SizedBox(
                     height: 25.0,
@@ -211,7 +226,7 @@ class _FormPageState extends State<FormPage> {
                   TextField(
                     onChanged: (text) {
                       if (text == null || text.isEmpty) {
-                        return 'enter valid data';
+                        return 'Enter valid data';
                       }
                       description = text;
                     },
@@ -219,7 +234,7 @@ class _FormPageState extends State<FormPage> {
                         floatingLabelBehavior: FloatingLabelBehavior.always,
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15.0)),
-                        hintText: 'if others then please mention here',
+                        hintText: 'If others then please mention here',
                         labelText: 'Description',
                         labelStyle: TextStyle(
                           color: Colors.red,
@@ -237,24 +252,24 @@ class _FormPageState extends State<FormPage> {
                       style: TextStyle(color: Colors.white, fontSize: 15.0),
                     ),
                     onPressed: () {
-                      // signal= true;
                       if (_formKey.currentState.validate()) {
-                        // If the form is valid, display a snackbar. In the real world,
-                        // you'd often call a server or save the information in a database.
                         ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text('Processing Data')));
-                        formData.doc('Pratik').set({
+                        formData.add({
+                          'name': name,
                           'mobileNo': mobileNo,
-                          'State': state,
-                          'city': city,
+                          'state': stateValue,
+                          'city': cityValue,
                           'selectedMedicine': _selectedmedicines,
                           'hospitalName': hospitalName,
-                          'description': description
+                          'description': description,
+                          'age': age,
+                          'time': DateTime.now(),
                         });
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PostHistory()));
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => PostHistory()));
                       }
                     },
                   )

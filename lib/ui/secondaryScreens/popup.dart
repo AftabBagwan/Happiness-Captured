@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'request.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:maps_launcher/maps_launcher.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:geocoder/geocoder.dart';
 
 class PopUp extends StatefulWidget {
   String name;
@@ -85,7 +82,11 @@ class _PopUpState extends State<PopUp> {
                     ],
                   ),
                   color: Colors.green,
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      Navigator.pop(context);
+                    });
+                  },
                 ),
                 // SizedBox(
                 //   width: spacee,
@@ -105,10 +106,10 @@ class _PopUpState extends State<PopUp> {
                   onPressed: () {
                     setState(() {
                       Navigator.pop(context);
-                      _firestore
-                          .collection('deleted')
-                          .doc(widget.userEmail)
-                          .update({'${widget.uid}': ''});
+                      // _firestore
+                      //     .collection('deleted')
+                      //     .doc(widget.userEmail)
+                      //     .update({'${widget.uid}': ''});
                     });
                   },
                 ),

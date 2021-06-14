@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:sos/signin.dart';
+import 'signin.dart';
 
 class ResetPass extends StatefulWidget {
   @override

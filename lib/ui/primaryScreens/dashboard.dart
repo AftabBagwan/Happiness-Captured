@@ -1,28 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sos/drawerpage.dart';
-import 'package:sos/requestAccepted.dart';
+import 'package:sos/ui/secondaryScreens/drawerpage.dart';
+import 'package:sos/ui/primaryScreens/requestAccepted.dart';
 import 'request.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoder/geocoder.dart';
-import 'package:uuid/uuid.dart';
-import 'package:uuid/uuid_util.dart';
+import '../../components/actionButton.dart';
+import 'package:sos/components/dashboardText.dart';
 
 class Dashboard extends StatefulWidget {
-  const Dashboard({Key key, User user})
-      : _user = user,
-        super(key: key);
-  final User _user;
-
   @override
   _DashboardState createState() => _DashboardState();
 }
 
 class _DashboardState extends State<Dashboard> {
+  @override
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
-  var uuid = Uuid();
   User loggedInUser;
   int counter = 0;
   bool hasBeenPressed = false;
@@ -31,7 +26,6 @@ class _DashboardState extends State<Dashboard> {
   var mobileNo;
   var data;
 
-  @override
   void initState() {
     super.initState();
     getCurrentUser();
@@ -59,21 +53,13 @@ class _DashboardState extends State<Dashboard> {
     }
   }
 
-  // Future dataUpdate() async {
-  //   return await _firestore.collection('database').doc(uid).get().then<dynamic>((DocumentSnapshot snapshot) async {
-  //     print(snapshot.data()['name']);
-  //     if(snapshot.data()['name'] == null){
-  //       print("No name exists");
-  //     }
-  //     else {
-  //       return snapshot.data()['name'];
-  //     }
-  //   });
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: DrawerPage(),
+      drawer: DrawerPage(
+        name: name,
+        email: loggedInUser.email,
+      ),
       backgroundColor: hasBeenPressed ? Color(0xfff85c4d) : Colors.white,
       appBar: AppBar(
         backgroundColor: Color(0xfff12d4e),
@@ -114,7 +100,7 @@ class _DashboardState extends State<Dashboard> {
               heroTag: 'requestPage',
               hasBeenPressed: hasBeenPressed,
               icon: Icon(
-                Icons.chat,
+                Icons.notifications,
                 color: hasBeenPressed ? Colors.red : Colors.white,
               ),
               page: Request(
@@ -138,10 +124,8 @@ class _DashboardState extends State<Dashboard> {
                       await Geolocator.isLocationServiceEnabled();
                   if (isLocationServiceEnabled) {
                     hasBeenPressed = true;
-                    Position position = await Geolocator.getLastKnownPosition();
                     Position position2 = await Geolocator.getCurrentPosition(
                         desiredAccuracy: LocationAccuracy.bestForNavigation);
-                    print(position);
                     print(position2);
                     final coordinates = new Coordinates(
                         position2.latitude, position2.longitude);
@@ -218,6 +202,14 @@ class _DashboardState extends State<Dashboard> {
                       'longitude': position2.longitude,
                       "messageTime": DateTime.now(),
                     });
+
+                    // var ref = _firestore.collection('request').;
+                    // var now = DateTime.now();
+                    // var cutoff = now.millisecond - 2 * 60 * 60 * 1000;
+                    // var old = ref.orderByChild('messageTime').endAt(cutoff).limitToLast(1);
+                    // var listener = old.on('child_added', function(snapshot) {
+                    // snapshot.ref.remove();
+                    // });
 
                     // _firestore.collection(collectionPath).set({
                     //   name: "Frank",
@@ -296,61 +288,6 @@ class _DashboardState extends State<Dashboard> {
             // 'After pressing the SOS button, we will contact the nearest person or volunteer !',
           ),
         ],
-      ),
-    );
-  }
-}
-
-class ActionButton extends StatelessWidget {
-  const ActionButton({
-    Key key,
-    @required this.hasBeenPressed,
-    this.icon,
-    this.page,
-    this.heroTag,
-  }) : super(key: key);
-
-  final bool hasBeenPressed;
-  final Icon icon;
-  final page;
-  final String heroTag;
-
-  @override
-  Widget build(BuildContext context) {
-    return FloatingActionButton(
-      heroTag: heroTag,
-      backgroundColor: hasBeenPressed ? Colors.white : Colors.red,
-      // onPressed: onPressed
-      child: icon,
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => page,
-          ),
-        );
-      },
-    );
-  }
-}
-
-class DashboardText extends StatelessWidget {
-  DashboardText({this.text, this.color});
-  final text;
-  final color;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(16),
-      child: Text(
-        text,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          color: color,
-          fontWeight: FontWeight.bold,
-          fontSize: 18,
-        ),
       ),
     );
   }

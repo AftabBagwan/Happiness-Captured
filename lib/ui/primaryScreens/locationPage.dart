@@ -1,30 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoder/geocoder.dart';
-import 'package:sos/dashboard.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:sos/signin.dart';
+import 'signin.dart';
 
 class LocationPage extends StatefulWidget {
   LocationPage({Key key, @required this.email}) : super(key: key);
   final String email;
   @override
-  _LocationPageState createState() => _LocationPageState(
-        userEmail: email,
-      );
+  _LocationPageState createState() => _LocationPageState();
 }
 
 class _LocationPageState extends State<LocationPage> {
-  _LocationPageState({@required this.userEmail});
-  final String userEmail;
   Position position;
-
   var finalAddress = '';
   final _firestore = FirebaseFirestore.instance;
-
   @override
   Widget build(BuildContext context) {
+    String userEmail = widget.email;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -52,22 +45,24 @@ class _LocationPageState extends State<LocationPage> {
                 SizedBox(
                   height: 70,
                 ),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  height: 150,
-                  width: 300,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
+                Center(
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    height: 150,
+                    width: 300,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: Text(
-                      finalAddress,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                    child: Center(
+                      child: Text(
+                        finalAddress,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
