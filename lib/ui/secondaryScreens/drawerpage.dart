@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+
 import 'package:sos/ui/primaryScreens/form.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sos/ui/primaryScreens/helpline.dart';
 import 'package:sos/ui/primaryScreens/locationPage.dart';
 import 'package:sos/ui/primaryScreens/ngo.dart';
 import 'package:sos/ui/primaryScreens/signin.dart';
 import '../../components/customDrawer.dart';
+
 
 class DrawerPage extends StatefulWidget {
   DrawerPage({Key key, @required this.name, this.email}) : super(key: key);
@@ -52,7 +55,8 @@ class _DrawerPageState extends State<DrawerPage> {
           ListTile(
             title: Text('Emergency Numbers'),
             onTap: () {
-              //Add the code for navigation
+              
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>HelpLine()));
             },
           ),
           ListTile(
