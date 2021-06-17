@@ -45,7 +45,7 @@ class _HelpLineState extends State<HelpLine> {
                       ListTile(
                         onTap: () async {
                           //// this is not working please add look this to launch phonecall after pressing on number
-                          await launch(url = document['number'].toString());
+                          await launchCaller(url = document['number'].toString());
                         },
                         title: Row(
                           children: <Widget>[
@@ -92,4 +92,13 @@ class _HelpLineState extends State<HelpLine> {
       ),
     );
   }
+   launchCaller( String number) async {
+    
+    var url = "tel:"+number;  
+    if (await canLaunch(url)) {
+       await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }   
+}
 }

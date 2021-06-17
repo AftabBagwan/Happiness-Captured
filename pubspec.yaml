@@ -39,7 +39,8 @@ dependencies:
   uuid: ^3.0.4
   http: ^0.13.3
   url_launcher: ^6.0.6
-  
+  flutter_webview_plugin:
+  timeago:
 
 
 dev_dependencies:

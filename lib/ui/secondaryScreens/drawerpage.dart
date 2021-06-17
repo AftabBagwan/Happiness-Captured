@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sos/ui/primaryScreens/covidnews.dart';
 
 import 'package:sos/ui/primaryScreens/form.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,6 +39,18 @@ class _DrawerPageState extends State<DrawerPage> {
             onTap: () {
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => NGO()));
+            },
+          ),
+          ListTile(
+            title: Text(
+              'Covid News',
+              style: TextStyle(
+                fontSize: 15.0,
+              ),
+            ),
+            onTap: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => NewsFeed()));
             },
           ),
           ListTile(
