@@ -21,14 +21,8 @@ class Covid {
   }
 }
 
-
 Future<Covid> getIndiaCount() async {
-  final response = await http.get(Uri.parse('https://corona-virus-world-and-india-data.p.rapidapi.com/api_india'),
-  headers: {
-    "x-rapidapi-key": "592162e179mshe71f29f3012a2cap16cb1djsnb5789cec38b1",
-	  "x-rapidapi-host": "corona-virus-world-and-india-data.p.rapidapi.com",
-  }
-  );
+  final response = await http.get(Uri.parse('https://covid19.mathdro.id/api'));
   return Covid.fromJson(json.decode(response.body));
 }
 
