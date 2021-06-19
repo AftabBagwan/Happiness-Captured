@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sos/ui/primaryScreens/covidcases.dart';
 import 'package:sos/ui/primaryScreens/covidnews.dart';
 
 import 'package:sos/ui/primaryScreens/form.dart';
@@ -51,6 +52,18 @@ class _DrawerPageState extends State<DrawerPage> {
             onTap: () {
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => NewsFeed()));
+            },
+          ),
+           ListTile(
+            title: Text(
+              'Covid Tracker',
+              style: TextStyle(
+                fontSize: 15.0,
+              ),
+            ),
+            onTap: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => new CovidCases()));
             },
           ),
           ListTile(

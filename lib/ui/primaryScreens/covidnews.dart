@@ -183,7 +183,6 @@ class _NewsFeedState extends State<NewsFeed> {
                                           ),
                                         ],
                                       ),
-                                      
                                       onTap: () {
                                         Navigator.push(
                                             context,
@@ -229,7 +228,7 @@ class _NewsFeedState extends State<NewsFeed> {
 
 class DescriptionPage extends StatelessWidget {
   static String tag = 'description-page';
-  
+
   DescriptionPage(this.urlnews);
   final String urlnews;
 
