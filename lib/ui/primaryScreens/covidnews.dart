@@ -54,9 +54,9 @@ class _NewsFeedState extends State<NewsFeed> {
 
   bool loading = false;
 
-  var refreshKey = GlobalKey<RefreshIndicatorState>();
+  var reloadkey = GlobalKey<RefreshIndicatorState>();
 
-  List<News> ls_news;
+  List<News> latestnews;
   Future<List<News>> getNews() async {
     final response = await http.get(Uri.parse(api));
     final res = jsonDecode(response.body);
@@ -71,9 +71,9 @@ class _NewsFeedState extends State<NewsFeed> {
         loading = true;
       });
     }
-    refreshKey.currentState?.show(atTop: false);
+    reloadkey.currentState?.show(atTop: false);
     await Future.delayed(Duration(seconds: 2));
-    ls_news = await getNews();
+    latestnews = await getNews();
     if (this.mounted) {
       setState(() {
         loading = false;
@@ -102,7 +102,7 @@ class _NewsFeedState extends State<NewsFeed> {
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.green)),
                 )
               : ListView.builder(
-                  itemCount: ls_news == null ? 0 : ls_news.length,
+                  itemCount: latestnews == null ? 0 : latestnews.length,
                   padding: new EdgeInsets.all(8.0),
                   itemBuilder: (BuildContext context, int index) {
                     return new GestureDetector(
@@ -113,25 +113,25 @@ class _NewsFeedState extends State<NewsFeed> {
                           child: new Column(
                             children: [
                               new Row(
-                                children: <Widget>[
-                                  new Padding(
-                                    padding: new EdgeInsets.only(left: 4.0),
-                                    child: new Text(
-                                      timeago.format(DateTime.parse(
-                                          ls_news[index]
-                                              .publishedAt
-                                              .toString())),
-                                      style: new TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.grey[600],
-                                      ),
-                                    ),
-                                  ),
+                                children: [
+                                  // new Padding(
+                                  //   padding: new EdgeInsets.only(left: 4.0),
+                                  //   child: new Text(
+                                  //     timeago.format(DateTime.parse(
+                                  //         latestnews[index]
+                                  //             .publishedAt
+                                  //             .toString())),
+                                  //     style: new TextStyle(
+                                  //       fontWeight: FontWeight.w400,
+                                  //       color: Colors.grey[600],
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   new Padding(
                                     padding: new EdgeInsets.all(5.0),
                                     child: new Text(
-                                      ls_news[index].sourcename != null
-                                          ? ls_news[index].sourcename
+                                      latestnews[index].sourcename != null
+                                          ? latestnews[index].sourcename
                                           : "NDTV",
                                       style: new TextStyle(
                                         fontWeight: FontWeight.w500,
@@ -156,9 +156,9 @@ class _NewsFeedState extends State<NewsFeed> {
                                                 bottom: 8.0,
                                                 top: 8.0),
                                             child: new Text(
-                                              ls_news[index].title.toString() !=
+                                              latestnews[index].title.toString() !=
                                                       null
-                                                  ? ls_news[index]
+                                                  ? latestnews[index]
                                                       .title
                                                       .toString()
                                                   : "Corona Virus",
@@ -173,8 +173,8 @@ class _NewsFeedState extends State<NewsFeed> {
                                                 right: 4.0,
                                                 bottom: 4.0),
                                             child: new Text(
-                                              ls_news[index].description != null
-                                                  ? ls_news[index].description
+                                              latestnews[index].description != null
+                                                  ? latestnews[index].description
                                                   : "",
                                               style: new TextStyle(
                                                 color: Colors.grey[500],
@@ -189,7 +189,7 @@ class _NewsFeedState extends State<NewsFeed> {
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     DescriptionPage(
-                                                        ls_news[index]
+                                                        latestnews[index]
                                                             .launchurl
                                                             .toString())));
                                       },
@@ -203,8 +203,8 @@ class _NewsFeedState extends State<NewsFeed> {
                                           height: 100.0,
                                           width: 100.0,
                                           child: new Image.network(
-                                            ls_news[index].url != null
-                                                ? ls_news[index].url
+                                            latestnews[index].url != null
+                                                ? latestnews[index].url
                                                 : "https://image.shutterstock.com/image-vector/illustration-flat-icon-tv-channel-260nw-482689633.jpg",
                                             fit: BoxFit.cover,
                                           ),
