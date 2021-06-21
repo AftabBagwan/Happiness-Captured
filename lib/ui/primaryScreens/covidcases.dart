@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-
 class Covid {
   int confirmvalue;
   int recovervalue;
@@ -43,12 +42,12 @@ class _CovidCasesState extends State<CovidCases> {
 
   Future<void> loadcount() async {
     setState(() {
-      countingload= true;
+      countingload = true;
     });
     covidres = await getIndiaCount();
     print("covid deaths is" + covidres.deaths.toString());
     setState(() {
-      countingload= false;
+      countingload = false;
     });
   }
 
@@ -89,10 +88,10 @@ class _CovidCasesState extends State<CovidCases> {
                   Flexible(
                       child: ListTile(
                     title: Text(
-                      "lastupdatedd:",
+                      "lastupdated:",
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
-                    subtitle: Text(covidres.lastupdated, style: TextStyle()),
+                    subtitle: Text(covidres.lastupdated.toString(),style: TextStyle(),),
                   ))
                 ],
               ),
