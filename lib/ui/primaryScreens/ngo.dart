@@ -18,7 +18,7 @@ class NGO extends StatelessWidget {
           children: [
             StreamBuilder(
                 stream: _firestore
-                    .collection('formdata')
+                    .collection('formData')
                     // .orderBy('messageTime', descending: true)
                     .snapshots(),
                 builder: (BuildContext context,
@@ -42,21 +42,21 @@ class NGO extends StatelessWidget {
                               Text(
                                 data['name'],
                               ),
-                              // Text(
-                              //   data['mobileNo'],
-                              // ),
-                              // Text(
-                              //   data['state'],
-                              // ),
-                              // Text(
-                              //   data['description'],
-                              // ),
-                              // Text(
-                              //   data['city'],
-                              // ),
-                              // Text(
-                              //   data['age'],
-                              // ),
+                              Text(
+                                data['mobileNo'],
+                              ),
+                              Text(
+                                data['state'],
+                              ),
+                              Text(
+                                data['description'],
+                              ),
+                              Text(
+                                data['city'],
+                              ),
+                              Text(
+                                data['age'],
+                              ),
                               
                             ],
                           ),
