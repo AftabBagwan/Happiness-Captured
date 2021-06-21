@@ -43,44 +43,44 @@ class NGO extends StatelessWidget {
                             child: Column(
                               children: [
                                 Text(
-                                  "name" + data['name'],
+                                  "name : " + data['name'],
                                   style: TextStyle(
                                     fontSize: 20.0,
                                   ),
                                 ),
                                 Text(
-                                  "mobileNo:" + data['mobileNo'],
+                                  "mobileNo : " + data['mobileNo'],
                                   style: TextStyle(
                                     fontSize: 20.0,
                                   ),
                                 ),
                                 Text(
-                                  "State"+ data['state'],
+                                  "State :" + data['state'],
                                   style: TextStyle(
                                     fontSize: 20.0,
                                   ),
                                 ),
                                 Text(
-                                  "Description" + data['description'],
+                                  "Description : " + data['description'],
                                   style: TextStyle(
                                     fontSize: 20.0,
                                   ),
                                 ),
                                 Text(
-                                  "City" + data['city'],
+                                  "City : " + data['city'],
                                   style: TextStyle(
                                     fontSize: 20.0,
                                   ),
 
                                 ),
                                 Text(
-                                  "Age" + data['age'],
+                                  "Age : " + data['age'],
                                   style: TextStyle(
                                     fontSize: 20.0,
                                   ),
                                 ),
                                 Text(
-                                 "requirement" + data['selectedMedicine'],
+                                 "Requirement : " + data['selectedMedicine'],
                                   style: TextStyle(
                                     fontSize: 20.0,
                                   ),
