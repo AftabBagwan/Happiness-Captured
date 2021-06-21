@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:sos/components/notificationUI.dart';
 
 class NGO extends StatelessWidget {
   final _firestore = FirebaseFirestore.instance;
@@ -20,7 +19,7 @@ class NGO extends StatelessWidget {
             StreamBuilder(
                 stream: _firestore
                     .collection('formData')
-                    .orderBy('messageTime', descending: true)
+                    // .orderBy('messageTime', descending: true)
                     .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -30,34 +29,68 @@ class NGO extends StatelessWidget {
                     );
                   }
                   return Expanded(
-                    child: ListView(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      children: snapshot.data.docs.map((formData) {
-                        return NotificationUI(
-                          address: formData['city'],
-                          name: formData['name'],
-                          mobileNo: formData['mobileNo'],
-                          // distance: Geolocator.distanceBetween(
-                          //         request['latitude'],
-                          //         request['longitude'],
-                          //         19.920600079349757,
-                          //         75.01306136879904) /
-                          //     1000,
-                          // uid: request.id,
-                          // userEmail: uid,
-                          // requestLatitude: request['latitude'],
-                          // requestLongitude: request['longitude'],
-                          // name: uid,
-                          // name: _firestore
-                          //     .collection('database')
-                          //     .doc("$uid")
-                          //     .get()
-                          //     .then((doc) => doc.data()['name']),
+                    child: ListView.builder(
+                      itemCount: snapshot.data.docs.length,
+                      itemBuilder: (context, index) {
+                        DocumentSnapshot Formdataa = snapshot.data.docs[index];
+                        return Material(
+                          borderRadius: BorderRadius.circular(15.0),
+                          elevation: 5.0,
+                          color: Color(0xfff85c4d),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 20),
+                            child: Column(
+                              children: [
+                                Text(
+                                  Formdataa['name'],
+                                ),
+                                Text(
+                                  Formdataa['mobileNo'],
+                                ),
+                                Text(
+                                  Formdataa['state'],
+                                ),
+                                Text(
+                                  Formdataa['description'],
+                                ),
+                                Text(
+                                  Formdataa['city'],
+                                ),
+                                Text(
+                                  Formdataa['age'],
+                                ),
+                                Text(
+                                  Formdataa['selectedMedicines'],
+                                ),
+                              ],
+                            ),
+                          ),
                         );
-                      }).toList(),
+                      },
+
+                      // return NotificationUI(
+                      //   address: formData['city'],
+                      //   name: formData['name'],
+                      //   mobileNo: formData['mobileNo'],
+                      //
+                      //   // distance: Geolocator.distanceBetween(
+                      //   //         request['latitude'],
+                      //   //         request['longitude'],
+                      //   //         19.920600079349757,
+                      //   //         75.01306136879904) /
+                      //   //     1000,
+                      //   // uid: request.id,
+                      //   // userEmail: uid,
+                      //   // requestLatitude: request['latitude'],
+                      //   // requestLongitude: request['longitude'],
+                      //   // name: uid,
+                      //   // name: _firestore
+                      //   //     .collection('database')
+                      //   //     .doc("$uid")
+                      //   //     .get()
+                      //   //     .then((doc) => doc.data()['name']),
+                      // );
                     ),
                   );
                 }),

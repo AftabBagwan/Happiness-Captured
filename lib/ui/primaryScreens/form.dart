@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csc_picker/csc_picker.dart';
 
 class FormPage extends StatefulWidget {
+
   @override
   _FormPageState createState() => _FormPageState();
 }
@@ -14,6 +15,10 @@ class _FormPageState extends State<FormPage> {
   final CollectionReference formData =
       FirebaseFirestore.instance.collection('formData');
 
+
+  _FormPageState({this.mobileNo,this.age,this.hospitalName,
+    this.description,this.stateValue,this.cityValue,
+    this.name,this.countryValue,this.selectedMedicines});
   String mobileNo;
   String age;
   String hospitalName;
@@ -22,7 +27,7 @@ class _FormPageState extends State<FormPage> {
   String cityValue;
   String countryValue;
   String name;
-
+  String selectedMedicines;
   final _formKey = GlobalKey<FormState>();
 
   List<String> _medicines = [
@@ -34,7 +39,9 @@ class _FormPageState extends State<FormPage> {
     'Others'
   ];
 
-  String _selectedmedicines;
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -203,10 +210,10 @@ class _FormPageState extends State<FormPage> {
                     child: DropdownButton(
                       isExpanded: true,
                       hint: Text('Please choose your requirement'),
-                      value: _selectedmedicines,
+                      value: selectedMedicines,
                       onChanged: (value) {
                         setState(() {
-                          _selectedmedicines = value;
+                          selectedMedicines = value;
                         });
                       },
                       items: _medicines.map((location) {
@@ -260,7 +267,7 @@ class _FormPageState extends State<FormPage> {
                           'mobileNo': mobileNo,
                           'state': stateValue,
                           'city': cityValue,
-                          'selectedMedicine': _selectedmedicines,
+                          'selectedMedicine': selectedMedicines,
                           'hospitalName': hospitalName,
                           'description': description,
                           'age': age,
