@@ -2,22 +2,21 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:timeago/timeago.dart';
 
 class Covid {
-  int confvalue;
-  int recvalue;
+  int confirmvalue;
+  int recovervalue;
   int deaths;
-  String lastupdate;
+  String lastupdated;
 
-  Covid({this.confvalue, this.recvalue, this.deaths, this.lastupdate});
+  Covid({this.confirmvalue, this.recovervalue, this.deaths, this.lastupdated});
 
   factory Covid.fromJson(Map<dynamic, dynamic> json) {
     return Covid(
-        confvalue: json['confirmed']['value'] as int,
-        recvalue: json['recovered']['value'] as int,
+        confirmvalue: json['confirmed']['value'] as int,
+        recovervalue: json['recovered']['value'] as int,
         deaths: json['deaths']['value'] as int,
-        lastupdate: json['lastUpdate'] as String);
+        lastupdated: json['lastupdated'] as String);
   }
 }
 
@@ -32,8 +31,8 @@ class CovidCases extends StatefulWidget {
 }
 
 class _CovidCasesState extends State<CovidCases> {
-  Covid covid_res;
-  bool countloading;
+  Covid covidres;
+  bool countingload;
 
   @override
   void initState() {
@@ -43,12 +42,12 @@ class _CovidCasesState extends State<CovidCases> {
 
   Future<void> loadcount() async {
     setState(() {
-      countloading = true;
+      countingload = true;
     });
-    covid_res = await getIndiaCount();
-    print("covid deaths is" + covid_res.deaths.toString());
+    covidres = await getIndiaCount();
+    print("covid deaths is" + covidres.deaths.toString());
     setState(() {
-      countloading = false;
+      countingload = false;
     });
   }
 
@@ -64,17 +63,17 @@ class _CovidCasesState extends State<CovidCases> {
         child: Container(
           padding: EdgeInsets.all(10),
           child: Column(
-            children: <Widget>[
+            children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
+                children: [
                   Icon(
                     Icons.info_outline,
                   ),
                   SizedBox(
                     width: 10,
                   ),
-                  Text("India Corona Cases",
+                  Text("India Live Corona Cases",
                       style: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.w500,
@@ -83,25 +82,25 @@ class _CovidCasesState extends State<CovidCases> {
               ),
               Divider(),
               Row(
-                children: <Widget>[
+                children: [
                   //Icon(Icons.timer, color: Colors.black),
                   //  SizedBox(width: 2),
                   Flexible(
                       child: ListTile(
                     title: Text(
-                      "LastUpdated:",
+                      "lastupdated:",
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
-                    subtitle: Text(covid_res.lastupdate, style: TextStyle()),
+                    subtitle: Text(covidres.lastupdated.toString(),style: TextStyle(),),
                   ))
                 ],
               ),
-              titleWidget('Confirmed', covid_res.confvalue.toString() ?? '',
+              titleWidget('Confirmed', covidres.confirmvalue.toString() ?? '',
                   Colors.blue),
-              titleWidget('Recovered', covid_res.recvalue.toString() ?? '',
+              titleWidget('Recovered', covidres.recovervalue.toString() ?? '',
                   Colors.green),
               titleWidget(
-                  'Deaths', covid_res.deaths.toString() ?? '', Colors.red),
+                  'Deaths', covidres.deaths.toString() ?? '', Colors.red),
             ],
           ),
         ),
