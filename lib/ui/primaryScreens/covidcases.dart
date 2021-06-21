@@ -4,19 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Covid {
-  int confirmvalue;
-  int recovervalue;
+  int confvalue;
+  int recvalue;
   int deaths;
-  String lastupdated;
+  String lastupdate;
 
-  Covid({this.confirmvalue, this.recovervalue, this.deaths, this.lastupdated});
+  Covid({this. confvalue, this.recvalue, this.deaths, this.lastupdate});
 
   factory Covid.fromJson(Map<dynamic, dynamic> json) {
     return Covid(
-        confirmvalue: json['confirmed']['value'] as int,
-        recovervalue: json['recovered']['value'] as int,
+       confvalue: json['confirmed']['value'] as int,
+        recvalue: json['recovered']['value'] as int,
         deaths: json['deaths']['value'] as int,
-        lastupdated: json['lastupdated'] as String);
+        lastupdate: json['lastupdate'] as String);
   }
 }
 
@@ -88,16 +88,19 @@ class _CovidCasesState extends State<CovidCases> {
                   Flexible(
                       child: ListTile(
                     title: Text(
-                      "lastupdated:",
+                      "lastupdate:",
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
-                    subtitle: Text(covidres.lastupdated.toString(),style: TextStyle(),),
+                    subtitle: Text(
+                      covidres.lastupdate.toString(),
+                      style: TextStyle(),
+                    ),
                   ))
                 ],
               ),
-              titleWidget('Confirmed', covidres.confirmvalue.toString() ?? '',
+              titleWidget('Confirmed', covidres. confvalue.toString() ?? '',
                   Colors.blue),
-              titleWidget('Recovered', covidres.recovervalue.toString() ?? '',
+              titleWidget('Recovered', covidres.recvalue.toString() ?? '',
                   Colors.green),
               titleWidget(
                   'Deaths', covidres.deaths.toString() ?? '', Colors.red),
