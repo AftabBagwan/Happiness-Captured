@@ -37,9 +37,27 @@ class _CovidCasesState extends State<CovidCases> {
   @override
   void initState() {
     super.initState();
+    refreshList();
     loadcount();
   }
+   var reloadkey = GlobalKey<RefreshIndicatorState>();
+ Future<Null> refreshList() async {
+    if (this.mounted) {
+      setState(() {
+        countingload = true;
+      });
+    }
+    reloadkey.currentState?.show(atTop: false);
+    await Future.delayed(Duration(seconds: 2));
+    covidres = await getIndiaCount();
+    if (this.mounted) {
+      setState(() {
+        countingload = false;
+      });
+    }
 
+    return null;
+  }
   Future<void> loadcount() async {
     setState(() {
       countingload = true;
