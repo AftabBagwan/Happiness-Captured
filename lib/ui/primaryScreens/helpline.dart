@@ -45,14 +45,17 @@ class _HelpLineState extends State<HelpLine> {
                       ListTile(
                         onTap: () async {
                           //// this is not working please add look this to launch phonecall after pressing on number
-                          await launchCaller(url = document['number'].toString());
+                          await launchCaller(
+                              url = document['number'].toString());
                         },
                         title: Row(
                           children: <Widget>[
                             Text(
                               document['state'].toString(),
                               style: TextStyle(
-                                  fontSize: 19, fontWeight: FontWeight.w500),
+                                fontSize: 19,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ],
                         ),
@@ -65,7 +68,7 @@ class _HelpLineState extends State<HelpLine> {
                                 children: <Widget>[
                                   Icon(
                                     Icons.call,
-                                    color: Colors.blueAccent,
+                                    color: Colors.red,
                                   ),
                                   SizedBox(
                                     width: 20,
@@ -73,7 +76,8 @@ class _HelpLineState extends State<HelpLine> {
                                   Text(
                                     document['number'].toString(),
                                     style: TextStyle(
-                                        color: Colors.blueAccent[200]),
+                                      color: Colors.red,
+                                    ),
                                   )
                                 ],
                               ),
@@ -92,13 +96,13 @@ class _HelpLineState extends State<HelpLine> {
       ),
     );
   }
-   launchCaller( String number) async {
-    
-    var url = "tel:"+number;  
+
+  launchCaller(String number) async {
+    var url = "tel:" + number;
     if (await canLaunch(url)) {
-       await launch(url);
+      await launch(url);
     } else {
       throw 'Could not launch $url';
-    }   
-}
+    }
+  }
 }

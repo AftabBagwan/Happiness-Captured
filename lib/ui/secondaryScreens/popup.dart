@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:maps_launcher/maps_launcher.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PopUp extends StatefulWidget {
   String name;
@@ -11,6 +12,7 @@ class PopUp extends StatefulWidget {
   var requestLatitude;
   var requestLongitude;
   var uid;
+
   PopUp({
     Key key,
     @required this.name,
@@ -25,6 +27,14 @@ class PopUp extends StatefulWidget {
   @override
   _PopUpState createState() => _PopUpState();
 }
+
+// Future<void> _makePhoneCall(String url) async {
+//   if (await canLaunch(url)) {
+//     await launch(url);
+//   } else {
+//     throw 'Could not launch $url';
+//   }
+// }
 
 class _PopUpState extends State<PopUp> {
   final _firestore = FirebaseFirestore.instance;
@@ -58,12 +68,18 @@ class _PopUpState extends State<PopUp> {
             SizedBox(
               height: 10,
             ),
+            // ListTile(
+            //   title:
             Text(widget.mobileNo,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                   fontStyle: FontStyle.normal,
                 )),
+            //   onTap: () {
+            //     launch('tel:9623865786');
+            //   },
+            // ),
             SizedBox(
               height: 10,
             ),

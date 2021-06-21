@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sos/ui/primaryScreens/about.dart';
 import 'package:sos/ui/primaryScreens/covidcases.dart';
 import 'package:sos/ui/primaryScreens/covidnews.dart';
 
@@ -8,8 +9,8 @@ import 'package:sos/ui/primaryScreens/helpline.dart';
 import 'package:sos/ui/primaryScreens/locationPage.dart';
 import 'package:sos/ui/primaryScreens/ngo.dart';
 import 'package:sos/ui/primaryScreens/signin.dart';
+import 'package:sos/vaccination.dart';
 import '../../components/customDrawer.dart';
-
 
 class DrawerPage extends StatefulWidget {
   DrawerPage({Key key, @required this.name, this.email}) : super(key: key);
@@ -29,6 +30,13 @@ class _DrawerPageState extends State<DrawerPage> {
         children: [
           CustomDrawer(
             name: widget.name,
+          ),
+          ListTile(
+            title: Text('Vaccination'),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Vaccination()));
+            },
           ),
           ListTile(
             title: Text(
@@ -54,7 +62,7 @@ class _DrawerPageState extends State<DrawerPage> {
                   .push(MaterialPageRoute(builder: (context) => NewsFeed()));
             },
           ),
-           ListTile(
+          ListTile(
             title: Text(
               'Covid Tracker',
               style: TextStyle(
@@ -62,8 +70,8 @@ class _DrawerPageState extends State<DrawerPage> {
               ),
             ),
             onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => new CovidCases()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => new CovidCases()));
             },
           ),
           ListTile(
@@ -81,13 +89,19 @@ class _DrawerPageState extends State<DrawerPage> {
           ListTile(
             title: Text('Emergency Numbers'),
             onTap: () {
-              
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>HelpLine()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => HelpLine()));
             },
           ),
           ListTile(
             title: Text('About'),
             onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => About(),
+                ),
+              );
               //Add the code for navigation
             },
           ),

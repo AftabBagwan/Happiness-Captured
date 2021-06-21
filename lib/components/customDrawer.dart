@@ -47,7 +47,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   Text(
                     '$userName',
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

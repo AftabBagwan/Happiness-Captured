@@ -8,7 +8,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:geocoder/geocoder.dart';
 import '../../components/actionButton.dart';
 import 'package:sos/components/dashboardText.dart';
-import 'package:uuid/uuid.dart';
+// import 'package:uuid/uuid.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -26,6 +26,7 @@ class _DashboardState extends State<Dashboard> {
   var name;
   var mobileNo;
   var data;
+  var key;
 
   void initState() {
     super.initState();
@@ -95,6 +96,7 @@ class _DashboardState extends State<Dashboard> {
                   hasBeenPressed = false;
                   counter = 0;
                 });
+                _firestore..collection('request').doc('$key').delete();
               },
             ),
             ActionButton(
@@ -194,7 +196,9 @@ class _DashboardState extends State<Dashboard> {
                     //       .arrayUnion("greater_virginia")
                     // });
 
-                    _firestore.collection('request').add({
+                    key = UniqueKey();
+
+                    _firestore.collection('request').doc("$key").set({
                       'address': request,
                       'sender': loggedInUser.email,
                       'name': name,
