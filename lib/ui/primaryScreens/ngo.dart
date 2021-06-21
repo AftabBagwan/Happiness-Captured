@@ -18,7 +18,7 @@ class NGO extends StatelessWidget {
           children: [
             StreamBuilder(
                 stream: _firestore
-                    .collection('formData')
+                    .collection('formdata')
                     // .orderBy('messageTime', descending: true)
                     .snapshots(),
                 builder: (BuildContext context,
@@ -32,47 +32,41 @@ class NGO extends StatelessWidget {
                     child: ListView.builder(
                       itemCount: snapshot.data.docs.length,
                       itemBuilder: (context, index) {
-                        DocumentSnapshot Formdataa = snapshot.data.docs[index];
-                        return Material(
-                          borderRadius: BorderRadius.circular(15.0),
+                        DocumentSnapshot data = snapshot.data.docs[index];
+                        return Card(
+                          
                           elevation: 5.0,
                           color: Color(0xfff85c4d),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 20),
-                            child: Column(
-                              children: [
-                                Text(
-                                  Formdataa['name'],
-                                ),
-                                Text(
-                                  Formdataa['mobileNo'],
-                                ),
-                                Text(
-                                  Formdataa['state'],
-                                ),
-                                Text(
-                                  Formdataa['description'],
-                                ),
-                                Text(
-                                  Formdataa['city'],
-                                ),
-                                Text(
-                                  Formdataa['age'],
-                                ),
-                                Text(
-                                  Formdataa['selectedMedicines'],
-                                ),
-                              ],
-                            ),
+                          child: Column(
+                            children: [
+                              Text(
+                                data['name'],
+                              ),
+                              // Text(
+                              //   data['mobileNo'],
+                              // ),
+                              // Text(
+                              //   data['state'],
+                              // ),
+                              // Text(
+                              //   data['description'],
+                              // ),
+                              // Text(
+                              //   data['city'],
+                              // ),
+                              // Text(
+                              //   data['age'],
+                              // ),
+                              
+                            ],
                           ),
                         );
                       },
 
                       // return NotificationUI(
-                      //   address: formData['city'],
-                      //   name: formData['name'],
-                      //   mobileNo: formData['mobileNo'],
+                      //   address: data['city'],
+                      //   name: data['name'],
+                      //   mobileNo: data['mobileNo'],
                       //
                       //   // distance: Geolocator.distanceBetween(
                       //   //         request['latitude'],
