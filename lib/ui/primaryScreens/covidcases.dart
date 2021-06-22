@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -9,14 +8,15 @@ class Covid {
   int deaths;
   String lastupdate;
 
-  Covid({this. confvalue, this.recvalue, this.deaths, this.lastupdate});
+  Covid({this.confvalue, this.recvalue, this.deaths, this.lastupdate});
 
   factory Covid.fromJson(Map<dynamic, dynamic> json) {
     return Covid(
-       confvalue: json['confirmed']['value'] as int,
-        recvalue: json['recovered']['value'] as int,
-        deaths: json['deaths']['value'] as int,
-        lastupdate: json['lastupdate'] as String);
+      confvalue: json['confirmed']['value'] as int,
+      recvalue: json['recovered']['value'] as int,
+      deaths: json['deaths']['value'] as int,
+      lastupdate: json['lastUpdate'] as String,
+    );
   }
 }
 
@@ -40,8 +40,9 @@ class _CovidCasesState extends State<CovidCases> {
     refreshList();
     loadcount();
   }
-   var reloadkey = GlobalKey<RefreshIndicatorState>();
- Future<Null> refreshList() async {
+
+  var reloadkey = GlobalKey<RefreshIndicatorState>();
+  Future<Null> refreshList() async {
     if (this.mounted) {
       setState(() {
         countingload = true;
@@ -58,12 +59,12 @@ class _CovidCasesState extends State<CovidCases> {
 
     return null;
   }
+
   Future<void> loadcount() async {
+    covidres = await getIndiaCount();
     setState(() {
       countingload = true;
     });
-    covidres = await getIndiaCount();
-    print("covid deaths is" + covidres.deaths.toString());
     setState(() {
       countingload = false;
     });
@@ -106,7 +107,7 @@ class _CovidCasesState extends State<CovidCases> {
                   Flexible(
                       child: ListTile(
                     title: Text(
-                      "lastupdate:",
+                      "LastUpdated:",
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
                     subtitle: Text(
@@ -116,7 +117,7 @@ class _CovidCasesState extends State<CovidCases> {
                   ))
                 ],
               ),
-              titleWidget('Confirmed', covidres. confvalue.toString() ?? '',
+              titleWidget('Confirmed', covidres.confvalue.toString() ?? '',
                   Colors.blue),
               titleWidget('Recovered', covidres.recvalue.toString() ?? '',
                   Colors.green),

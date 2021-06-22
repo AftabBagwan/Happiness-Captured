@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sos/ui/primaryScreens/about.dart';
+import 'package:sos/ui/primaryScreens/admin.dart';
 import 'package:sos/ui/primaryScreens/covidcases.dart';
 import 'package:sos/ui/primaryScreens/covidnews.dart';
 
@@ -70,8 +71,8 @@ class _DrawerPageState extends State<DrawerPage> {
               ),
             ),
             onTap: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => new CovidCases()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CovidCases()));
             },
           ),
           ListTile(
@@ -100,6 +101,18 @@ class _DrawerPageState extends State<DrawerPage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => About(),
+                ),
+              );
+              //Add the code for navigation
+            },
+          ),
+          ListTile(
+            title: Text('Admin Portal'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Admin(),
                 ),
               );
               //Add the code for navigation

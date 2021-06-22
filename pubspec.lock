@@ -105,7 +105,7 @@ packages:
       name: file
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.1.1"
+    version: "6.1.2"
   firebase_auth:
     dependency: "direct main"
     description:
@@ -281,7 +281,7 @@ packages:
       name: pedantic
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.11.0"
+    version: "1.11.1"
   platform:
     dependency: transitive
     description:
@@ -392,13 +392,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.0"
-  timeago:
-    dependency: "direct main"
-    description:
-      name: timeago
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.1.0"
   typed_data:
     dependency: transitive
     description:
@@ -468,7 +461,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.5"
+    version: "2.2.2"
   xdg_directories:
     dependency: transitive
     description:
@@ -477,5 +470,5 @@ packages:
     source: hosted
     version: "0.2.0"
 sdks:
-  dart: ">=2.12.0 <3.0.0"
+  dart: ">=2.13.0 <3.0.0"
   flutter: ">=2.0.0"

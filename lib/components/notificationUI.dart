@@ -59,7 +59,11 @@ class NotificationUI extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  '$name',
+                  "Name: " + name,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
                 ),
                 Text(
                   "Address: " + address,
@@ -69,10 +73,10 @@ class NotificationUI extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '$mobileNo',
+                  "Mobile No: " + mobileNo,
                 ),
                 Text(
-                  '$distance',
+                  "Distance: " + distance.toString(),
                 )
               ],
             ),
