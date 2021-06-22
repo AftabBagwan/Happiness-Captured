@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:sos/components/extraWidget.dart';
 
 class Covid {
   int confvalue;
@@ -37,6 +38,7 @@ class _CovidCasesState extends State<CovidCases> {
   @override
   void initState() {
     super.initState();
+    
     refreshList();
     loadcount();
   }
@@ -45,7 +47,7 @@ class _CovidCasesState extends State<CovidCases> {
   Future<Null> refreshList() async {
     if (this.mounted) {
       setState(() {
-        countingload = true;
+        countingload = false;
       });
     }
     reloadkey.currentState?.show(atTop: false);
@@ -57,19 +59,20 @@ class _CovidCasesState extends State<CovidCases> {
       });
     }
 
-    return null;
+    // return null;
   }
 
-  Future<void> loadcount() async {
-    covidres = await getIndiaCount();
-    setState(() {
-      countingload = true;
-    });
-    setState(() {
-      countingload = false;
-    });
-  }
-
+  Future < void > loadcount() async {
+  setState(() {
+    countingload = true;
+  });
+  covidres = await getIndiaCount();
+  print("covid deaths is" + covidres.deaths.toString());
+  setState(() {
+    countingload = false;
+  });
+}
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +80,7 @@ class _CovidCasesState extends State<CovidCases> {
         backgroundColor: Colors.red,
         title: Text("Covid Tracker"),
       ),
-      body: Container(
+      body:Container(
         padding: EdgeInsets.all(8),
         child: Container(
           padding: EdgeInsets.all(10),
@@ -102,16 +105,16 @@ class _CovidCasesState extends State<CovidCases> {
               Divider(),
               Row(
                 children: [
-                  //Icon(Icons.timer, color: Colors.black),
-                  //  SizedBox(width: 2),
+                 
                   Flexible(
-                      child: ListTile(
+                      child:  ListTile(
                     title: Text(
                       "LastUpdated:",
-                      style: TextStyle(fontWeight: FontWeight.w500),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
+                   
                     subtitle: Text(
-                      covidres.lastupdate.toString(),
+                      covidres.lastupdate,
                       style: TextStyle(),
                     ),
                   ))
@@ -131,11 +134,4 @@ class _CovidCasesState extends State<CovidCases> {
   }
 }
 
-Widget titleWidget(title, subtitle, color) {
-  return ListTile(
-    title: Text(title,
-        style:
-            TextStyle(color: color, fontSize: 20, fontWeight: FontWeight.w500)),
-    trailing: Text(subtitle, style: TextStyle(color: color, fontSize: 18)),
-  );
-}
+
