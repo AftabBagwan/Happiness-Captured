@@ -16,26 +16,23 @@ class NGO extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            StreamBuilder(
+            StreamBuilder<QuerySnapshot>(
                 stream: _firestore
                     .collection('formData')
                     // .orderBy('messageTime', descending: true)
                     .snapshots(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot) {
-                  if (!snapshot.hasData) {
+                builder: (context, snap) {
+                  if (snap.data == null) {
                     return Center(
                       child: CircularProgressIndicator(),
                     );
                   }
                   return Expanded(
                     child: ListView.builder(
-                      itemCount: snapshot.data.docs.length,
+                      itemCount: snap.data.docs.length,
                       itemBuilder: (context, index) {
-                        DocumentSnapshot data = snapshot.data.docs[index];
+                        DocumentSnapshot data = snap.data.docs[index];
                         return Card(
-                          
-                          
                           elevation: 5.0,
                           color: Color(0xfff85c4d),
                           child: Padding(
@@ -71,7 +68,6 @@ class NGO extends StatelessWidget {
                                   style: TextStyle(
                                     fontSize: 20.0,
                                   ),
-
                                 ),
                                 Text(
                                   "Age : " + data['age'],
@@ -80,12 +76,11 @@ class NGO extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                 "Requirement : " + data['selectedMedicine'],
+                                  "Requirement : " + data['selectedMedicine'],
                                   style: TextStyle(
                                     fontSize: 20.0,
                                   ),
                                 ),
-                                
                               ],
                             ),
                           ),
