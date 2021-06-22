@@ -7,6 +7,7 @@ import 'package:sos/ui/primaryScreens/covidnews.dart';
 import 'package:sos/ui/primaryScreens/form.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sos/ui/primaryScreens/helpline.dart';
+import 'package:sos/ui/primaryScreens/instruction.dart';
 import 'package:sos/ui/primaryScreens/locationPage.dart';
 import 'package:sos/ui/primaryScreens/ngo.dart';
 import 'package:sos/ui/primaryScreens/signin.dart';
@@ -125,6 +126,15 @@ class _DrawerPageState extends State<DrawerPage> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => LocationPage(email: widget.email)));
+            },
+          ),
+           ListTile(
+            title: Text('Instruction'),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Instruction()));
             },
           ),
           ListTile(
