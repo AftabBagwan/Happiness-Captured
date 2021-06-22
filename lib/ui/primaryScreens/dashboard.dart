@@ -16,7 +16,6 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  @override
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   User loggedInUser;
@@ -27,7 +26,7 @@ class _DashboardState extends State<Dashboard> {
   var mobileNo;
   var data;
   var key;
-
+  @override
   void initState() {
     super.initState();
     getCurrentUser();

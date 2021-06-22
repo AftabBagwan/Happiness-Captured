@@ -94,20 +94,7 @@ class SignUp extends StatelessWidget {
                   },
                   keyboardType: TextInputType.emailAddress,
                   textAlign: TextAlign.center,
-                  decoration: InputDecoration(
-                    prefixIcon: new Icon(
-                      Icons.email,
-                      size: 30,
-                    ),
-                    hintText: 'Enter your email',
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 25.0, horizontal: 30.0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
-                      ),
-                    ),
-                  ),
+                  decoration: decoration(text:"Enter your Email", icon: Icons.person)
                 ),
                 SizedBox(
                   height: 30,
@@ -118,20 +105,7 @@ class SignUp extends StatelessWidget {
                   },
                   obscureText: true,
                   textAlign: TextAlign.center,
-                  decoration: InputDecoration(
-                    prefixIcon: new Icon(
-                      Icons.lock,
-                      size: 30,
-                    ),
-                    hintText: 'Enter your password',
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 25.0, horizontal: 30.0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
-                      ),
-                    ),
-                  ),
+                  decoration: decoration(text: "Enter Your Password" , icon: Icons.lock),
                 ),
 
                 SizedBox(
@@ -247,5 +221,22 @@ class SignUp extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  InputDecoration decoration( {IconData icon, String text}) {
+    return InputDecoration(
+                  prefixIcon: new Icon(
+                    icon,
+                    size: 30,
+                  ),
+                  hintText: text,
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 25.0, horizontal: 30.0),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(20),
+                    ),
+                  ),
+                );
   }
 }
