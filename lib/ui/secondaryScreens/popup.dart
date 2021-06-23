@@ -3,14 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 
+import 'package:share/share.dart';
+
 class PopUp extends StatefulWidget {
   String name;
   String address;
   String mobileNo;
   String userEmail;
+  // List arr = [];
+  String share;
   var requestLatitude;
   var requestLongitude;
   var uid;
+  // var pratik;
 
   PopUp({
     Key key,
@@ -18,6 +23,8 @@ class PopUp extends StatefulWidget {
     this.address,
     this.mobileNo,
     this.uid,
+    // this.arr,
+    // this.pratik,
     this.userEmail,
     this.requestLatitude,
     this.requestLongitude,
@@ -41,6 +48,7 @@ class _PopUpState extends State<PopUp> {
   Widget build(BuildContext context) {
     var lat = widget.requestLatitude;
     var long = widget.requestLongitude;
+    // String address = ,
     return SingleChildScrollView(
       child: Container(
         height: 400,
@@ -66,18 +74,12 @@ class _PopUpState extends State<PopUp> {
             SizedBox(
               height: 10,
             ),
-            // ListTile(
-            //   title:
             Text(widget.mobileNo,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                   fontStyle: FontStyle.normal,
                 )),
-            //   onTap: () {
-            //     launch('tel:9623865786');
-            //   },
-            // ),
             SizedBox(
               height: 10,
             ),
@@ -97,12 +99,9 @@ class _PopUpState extends State<PopUp> {
                   ),
                   color: Colors.green,
                   onPressed: () {
-                    _firestore
-                        .collection('request')
-                        .doc(widget.uid)
-                        .update({'AcceptedBy': widget.userEmail});
-                    print(widget.userEmail);
-                    Navigator.pop(context);
+                    setState(() {
+                      Navigator.pop(context);
+                    });
                   },
                   //
                 ),
@@ -121,28 +120,6 @@ class _PopUpState extends State<PopUp> {
                     ],
                   ),
                   color: Colors.red,
-                  onPressed: () {
-                    setState(() {
-                      Navigator.pop(context);
-                      // _firestore
-                      //     .collection('deleted')
-                      //     .doc(widget.userEmail)
-                      //     .update({'${widget.uid}': ''});
-                    });
-                  },
-                ),
-                MaterialButton(
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.share,
-                      ),
-                      Text(
-                        'Share',
-                      ),
-                    ],
-                  ),
-                  color: Colors.blue,
                   onPressed: () {
                     setState(() {
                       Navigator.pop(context);
@@ -173,6 +150,23 @@ class _PopUpState extends State<PopUp> {
                 MapsLauncher.launchCoordinates(lat, long);
               },
             ),
+            SizedBox(height: 10.0),
+            Builder(
+                builder: (BuildContext context) => MaterialButton(
+                  color: Colors.blue,
+                  padding: EdgeInsets.all(15.0),
+                    child: Text("Share"),
+                    onPressed: () {
+                      widget.share =
+                         'Name : '+ widget.name + ','+ 'Address : '+ widget.address+', Mobile : '+ widget.mobileNo;
+
+                      final RenderBox box = context.findRenderObject();
+
+                      Share.share(widget.share,
+                          subject: widget.name,
+                          sharePositionOrigin:
+                              box.localToGlobal(Offset.zero) & box.size);
+                    })),
           ],
         ),
       ),
