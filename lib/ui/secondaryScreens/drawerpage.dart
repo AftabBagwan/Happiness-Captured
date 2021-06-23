@@ -11,7 +11,8 @@ import 'package:sos/ui/primaryScreens/instruction.dart';
 import 'package:sos/ui/primaryScreens/locationPage.dart';
 import 'package:sos/ui/primaryScreens/ngo.dart';
 import 'package:sos/ui/primaryScreens/signin.dart';
-import 'package:sos/vaccination.dart';
+import 'package:sos/ui/primaryScreens/vaccinator.dart';
+
 import '../../components/customDrawer.dart';
 
 class DrawerPage extends StatefulWidget {
@@ -37,7 +38,7 @@ class _DrawerPageState extends State<DrawerPage> {
             title: Text('Vaccination'),
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Vaccination()));
+                  MaterialPageRoute(builder: (context) => Vaccinator()));
             },
           ),
           ListTile(
