@@ -4,19 +4,31 @@ import 'package:flutter/painting.dart';
 import 'package:geolocator/geolocator.dart';
 import '../../components/notificationUI.dart';
 
-class Request extends StatelessWidget {
+class Request extends StatefulWidget {
   Request({Key key, @required this.uid}) : super(key: key);
-
   final String uid;
+  @override
+  _RequestState createState() => _RequestState();
+}
+
+class _RequestState extends State<Request> {
+  var userLat;
+  var userLong;
 
   @override
   final _firestore = FirebaseFirestore.instance;
-  void getMessage() {
-    _firestore.collection('request').get().then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        print(doc.data());
-      });
-    });
+
+  void getCordinates() {
+    userLat = _firestore
+        .collection('database')
+        .doc(widget.uid)
+        .get()
+        .then((doc) => doc.data()['PrimaryLatitude']);
+    userLong = _firestore
+        .collection('database')
+        .doc(widget.uid)
+        .get()
+        .then((doc) => doc.data()['PrimaryLongitude']);
   }
 
   Widget build(BuildContext context) {
@@ -60,7 +72,7 @@ class Request extends StatelessWidget {
                                   75.01306136879904) /
                               1000,
                           uid: request.id,
-                          userEmail: uid,
+                          userEmail: widget.uid,
                           requestLatitude: request['latitude'],
                           requestLongitude: request['longitude'],
                           // name: uid,

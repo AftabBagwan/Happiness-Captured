@@ -10,6 +10,7 @@ Credits:
 ~ThankYou @Mr.Abhijeet Kushwaha for guiding and supporting.
 ~Logo designed by @Varun Ghorpade.
 ~SOS page designed by @Jane Kathryn Teo.
+~Covid related stuff is inspired by topcoder.
 
 Made with ❤️ by Team Amigos in collaboration with Happiness Captured.
 

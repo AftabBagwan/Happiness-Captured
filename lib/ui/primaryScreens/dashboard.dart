@@ -52,6 +52,7 @@ class _DashboardState extends State<Dashboard> {
     } catch (e) {
       print(e);
     }
+    setState(() {});
   }
 
   @override
@@ -205,6 +206,7 @@ class _DashboardState extends State<Dashboard> {
                       'latitude': position2.latitude,
                       'longitude': position2.longitude,
                       "messageTime": DateTime.now(),
+                      'AcceptedBy': '',
                     });
 
                     // var ref = _firestore.collection('request').;

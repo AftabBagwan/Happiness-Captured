@@ -38,12 +38,12 @@ class CovidCases extends StatefulWidget {
 
 class _CovidCasesState extends State<CovidCases> {
   Covid covidres;
-  bool countingload;
+  bool countingload = true;
 
   @override
   void initState() {
     super.initState();
-    // refreshList();
+    refreshList();
     loadcount();
   }
 
@@ -79,58 +79,65 @@ class _CovidCasesState extends State<CovidCases> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.red,
         title: Text("Covid Tracker"),
       ),
-      body: Container(
-        padding: EdgeInsets.all(8),
-        child: Container(
-          padding: EdgeInsets.all(10),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.info_outline,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text("India Live Corona Cases",
-                      style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w500,
-                      )),
-                ],
-              ),
-              Divider(),
-              Row(
-                children: [
-                  Flexible(
-                      child: ListTile(
-                    title: Text(
-                      "LastUpdated:",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+      body: countingload
+          ? Center(child: CircularProgressIndicator())
+          : Container(
+              padding: EdgeInsets.all(8),
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.info_outline,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text("India Live Corona Cases",
+                            style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white)),
+                      ],
                     ),
-                    subtitle: Text(
-                      covidres.lastupdate,
-                      style: TextStyle(),
+                    Row(
+                      children: [
+                        Flexible(
+                            child: ListTile(
+                          title: Text(
+                            "LastUpdated:",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          subtitle: Text(
+                            covidres.lastupdate,
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ))
+                      ],
                     ),
-                  ))
-                ],
+                    titleWidget('Confirmed',
+                        covidres.confvalue.toString() ?? '', Colors.blue),
+                    titleWidget('Recovered', covidres.recvalue.toString() ?? '',
+                        Colors.green),
+                    titleWidget(
+                        'Deaths', covidres.deaths.toString() ?? '', Colors.red),
+                  ],
+                ),
               ),
-              titleWidget('Confirmed', covidres.confvalue.toString() ?? '',
-                  Colors.blue),
-              titleWidget('Recovered', covidres.recvalue.toString() ?? '',
-                  Colors.green),
-              titleWidget(
-                  'Deaths', covidres.deaths.toString() ?? '', Colors.red),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 }

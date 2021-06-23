@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:maps_launcher/maps_launcher.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class PopUp extends StatefulWidget {
   String name;
@@ -42,7 +41,6 @@ class _PopUpState extends State<PopUp> {
   Widget build(BuildContext context) {
     var lat = widget.requestLatitude;
     var long = widget.requestLongitude;
-    // String address = ,
     return SingleChildScrollView(
       child: Container(
         height: 400,
@@ -99,9 +97,12 @@ class _PopUpState extends State<PopUp> {
                   ),
                   color: Colors.green,
                   onPressed: () {
-                    setState(() {
-                      Navigator.pop(context);
-                    });
+                    _firestore
+                        .collection('request')
+                        .doc(widget.uid)
+                        .update({'AcceptedBy': widget.userEmail});
+                    print(widget.userEmail);
+                    Navigator.pop(context);
                   },
                 ),
                 // SizedBox(
