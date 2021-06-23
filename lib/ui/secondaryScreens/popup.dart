@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:maps_launcher/maps_launcher.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
 
 class PopUp extends StatefulWidget {
@@ -34,13 +34,14 @@ class PopUp extends StatefulWidget {
   _PopUpState createState() => _PopUpState();
 }
 
-// Future<void> _makePhoneCall(String url) async {
-//   if (await canLaunch(url)) {
-//     await launch(url);
-//   } else {
-//     throw 'Could not launch $url';
-//   }
-// }
+launchCaller(mobileNo) async {
+  var url = "tel:" + mobileNo;
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
 
 class _PopUpState extends State<PopUp> {
   final _firestore = FirebaseFirestore.instance;
@@ -74,12 +75,18 @@ class _PopUpState extends State<PopUp> {
             SizedBox(
               height: 10,
             ),
-            Text(widget.mobileNo,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  fontStyle: FontStyle.normal,
-                )),
+            GestureDetector(
+              onTap: () async {
+                var url;
+                await launchCaller(url = widget.mobileNo.toString());
+              },
+              child: Text(widget.mobileNo,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    fontStyle: FontStyle.normal,
+                  )),
+            ),
             SizedBox(
               height: 10,
             ),
@@ -99,9 +106,12 @@ class _PopUpState extends State<PopUp> {
                   ),
                   color: Colors.green,
                   onPressed: () {
-                    setState(() {
-                      Navigator.pop(context);
-                    });
+                    _firestore
+                        .collection('request')
+                        .doc(widget.uid)
+                        .update({'AcceptedBy': widget.userEmail});
+                    print(widget.userEmail);
+                    Navigator.pop(context);
                   },
                   //
                 ),
@@ -126,6 +136,33 @@ class _PopUpState extends State<PopUp> {
                     });
                   },
                 ),
+
+                MaterialButton(
+                    color: Colors.blue,
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.share,
+                        ),
+                        Text("Share"),
+                      ],
+                    ),
+                    onPressed: () {
+                      widget.share = 'Name : ' +
+                          widget.name +
+                          ',' +
+                          'Address : ' +
+                          widget.address +
+                          ', Mobile : ' +
+                          widget.mobileNo;
+
+                      final RenderBox box = context.findRenderObject();
+
+                      Share.share(widget.share,
+                          subject: widget.name,
+                          sharePositionOrigin:
+                              box.localToGlobal(Offset.zero) & box.size);
+                    }),
               ],
             ),
             SizedBox(
@@ -150,23 +187,6 @@ class _PopUpState extends State<PopUp> {
                 MapsLauncher.launchCoordinates(lat, long);
               },
             ),
-            SizedBox(height: 10.0),
-            Builder(
-                builder: (BuildContext context) => MaterialButton(
-                  color: Colors.blue,
-                  padding: EdgeInsets.all(15.0),
-                    child: Text("Share"),
-                    onPressed: () {
-                      widget.share =
-                         'Name : '+ widget.name + ','+ 'Address : '+ widget.address+', Mobile : '+ widget.mobileNo;
-
-                      final RenderBox box = context.findRenderObject();
-
-                      Share.share(widget.share,
-                          subject: widget.name,
-                          sharePositionOrigin:
-                              box.localToGlobal(Offset.zero) & box.size);
-                    })),
           ],
         ),
       ),
