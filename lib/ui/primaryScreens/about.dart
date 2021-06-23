@@ -1,6 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
-class About extends StatelessWidget {
+class About extends StatefulWidget {
+  @override
+  _AboutState createState() => _AboutState();
+}
+
+class _AboutState extends State<About> {
+  String data = '';
+  fetchFileData() async {
+    String responseText;
+    responseText = await rootBundle.loadString('textFiles/about.txt');
+    setState(() {
+      data = responseText;
+    });
+  }
+
+  @override
+  void initState() {
+    fetchFileData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,25 +32,23 @@ class About extends StatelessWidget {
         backgroundColor: Color(0xfff12d4e),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Text(
-              'XYZ',
-              style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.w400),
-            ),
-            Divider(),
-            Text(
-              'Copyright 2021',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 5),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 3.0),
-              child: Text(
-                  'This application is basically to provide help to people who stucked in emergency situation.'),
-            )
-          ],
+        padding: const EdgeInsets.all(15.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Center(
+                child: Text(
+                  data,
+                  style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.w400),
+                ),
+              ),
+              Divider(),
+              Text(
+                'Copyright 2021',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
         ),
       ),
     );

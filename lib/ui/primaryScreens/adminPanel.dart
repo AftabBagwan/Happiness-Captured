@@ -26,18 +26,59 @@ class AdminPanel extends StatelessWidget {
                   _firestore.collection('request').get().then((snapshot) {
                     for (DocumentSnapshot ds in snapshot.docs) {
                       ds.reference.delete();
-                      print('ok');
                     }
                   });
                 },
                 child: Text(
-                  'Delete',
+                  'Delete User Request',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Text(
+            'User Request Delete Option For App Optimisation',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            width: 300,
+            height: 50,
+            color: Colors.green,
+            child: MaterialButton(
+              onPressed: () {
+                _firestore.collection('formData').get().then((snapshot) {
+                  for (DocumentSnapshot ds in snapshot.docs) {
+                    ds.reference.delete();
+                  }
+                });
+              },
+              child: Text(
+                'Delete NGO Request',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Text(
+            'NGO Request Delete Option For Form Optimisation',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
             ),
           )
         ],

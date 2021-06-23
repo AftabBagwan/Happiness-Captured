@@ -10,7 +10,7 @@ class NGO extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xfff12d4e),
         title: Text(
-          'Hppiness Captured',
+          'Happiness Captured',
         ),
       ),
       body: SafeArea(
@@ -19,7 +19,7 @@ class NGO extends StatelessWidget {
             StreamBuilder<QuerySnapshot>(
                 stream: _firestore
                     .collection('formData')
-                    // .orderBy('messageTime', descending: true)
+                    .orderBy('time', descending: true)
                     .snapshots(),
                 builder: (context, snap) {
                   if (snap.data == null) {
@@ -32,56 +32,63 @@ class NGO extends StatelessWidget {
                       itemCount: snap.data.docs.length,
                       itemBuilder: (context, index) {
                         DocumentSnapshot data = snap.data.docs[index];
-                        return Card(
-                          elevation: 5.0,
-                          color: Color(0xfff85c4d),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              children: [
-                                Text(
-                                  "name : " + data['name'],
-                                  style: TextStyle(
-                                    fontSize: 20.0,
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 8, horizontal: 10),
+                          child: Material(
+                            borderRadius: BorderRadius.circular(10),
+                            elevation: 12.0,
+                            color: Color(0xfff85c4d),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 20),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "Name : " + data['name'],
+                                    style: TextStyle(
+                                      fontSize: 20.0,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "mobileNo : " + data['mobileNo'],
-                                  style: TextStyle(
-                                    fontSize: 20.0,
+                                  Text(
+                                    "Mobile No : " + data['mobileNo'],
+                                    style: TextStyle(
+                                      fontSize: 20.0,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "State :" + data['state'],
-                                  style: TextStyle(
-                                    fontSize: 20.0,
+                                  Text(
+                                    "State :" + data['state'],
+                                    style: TextStyle(
+                                      fontSize: 20.0,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "Description : " + data['description'],
-                                  style: TextStyle(
-                                    fontSize: 20.0,
+                                  Text(
+                                    "Description : " + data['description'],
+                                    style: TextStyle(
+                                      fontSize: 20.0,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "City : " + data['city'],
-                                  style: TextStyle(
-                                    fontSize: 20.0,
+                                  Text(
+                                    "City : " + data['city'],
+                                    style: TextStyle(
+                                      fontSize: 20.0,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "Age : " + data['age'],
-                                  style: TextStyle(
-                                    fontSize: 20.0,
+                                  Text(
+                                    "Age : " + data['age'],
+                                    style: TextStyle(
+                                      fontSize: 20.0,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "Requirement : " + data['selectedMedicine'],
-                                  style: TextStyle(
-                                    fontSize: 20.0,
+                                  Text(
+                                    "Requirements : " +
+                                        data['selectedMedicine'],
+                                    style: TextStyle(
+                                      fontSize: 20.0,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         );

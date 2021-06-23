@@ -3,7 +3,6 @@ import 'package:sos/ui/primaryScreens/about.dart';
 import 'package:sos/ui/primaryScreens/admin.dart';
 import 'package:sos/ui/primaryScreens/covidcases.dart';
 import 'package:sos/ui/primaryScreens/covidnews.dart';
-
 import 'package:sos/ui/primaryScreens/form.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sos/ui/primaryScreens/helpline.dart';
@@ -11,7 +10,7 @@ import 'package:sos/ui/primaryScreens/instruction.dart';
 import 'package:sos/ui/primaryScreens/locationPage.dart';
 import 'package:sos/ui/primaryScreens/ngo.dart';
 import 'package:sos/ui/primaryScreens/signin.dart';
-import 'package:sos/ui/primaryScreens/vaccinator.dart';
+import 'package:sos/ui/primaryScreens/vaccination.dart';
 
 import '../../components/customDrawer.dart';
 
@@ -35,22 +34,15 @@ class _DrawerPageState extends State<DrawerPage> {
             name: widget.name,
           ),
           ListTile(
-            title: Text('Vaccination'),
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Vaccinator()));
-            },
-          ),
-          ListTile(
             title: Text(
-              'NGO',
+              'Covid Tracker',
               style: TextStyle(
                 fontSize: 15.0,
               ),
             ),
             onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => NGO()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CovidCases()));
             },
           ),
           ListTile(
@@ -67,18 +59,6 @@ class _DrawerPageState extends State<DrawerPage> {
           ),
           ListTile(
             title: Text(
-              'Covid Tracker',
-              style: TextStyle(
-                fontSize: 15.0,
-              ),
-            ),
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CovidCases()));
-            },
-          ),
-          ListTile(
-            title: Text(
               'Request For Needs',
               style: TextStyle(
                 fontSize: 15.0,
@@ -90,26 +70,75 @@ class _DrawerPageState extends State<DrawerPage> {
             },
           ),
           ListTile(
-            title: Text('Emergency Numbers'),
+            title: Text(
+              'NGO',
+              style: TextStyle(
+                fontSize: 15.0,
+              ),
+            ),
+            onTap: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => NGO()));
+            },
+          ),
+          ListTile(
+            title: Text(
+              'Emergency Numbers',
+              style: TextStyle(
+                fontSize: 15.0,
+              ),
+            ),
             onTap: () {
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => HelpLine()));
             },
           ),
           ListTile(
-            title: Text('About'),
+            title: Text(
+              'Update Primary Location',
+              style: TextStyle(
+                fontSize: 15.0,
+              ),
+            ),
             onTap: () {
               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => About(),
-                ),
-              );
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => LocationPage(email: widget.email)));
+            },
+          ),
+          ListTile(
+            title: Text(
+              'Instruction',
+              style: TextStyle(
+                fontSize: 15.0,
+              ),
+            ),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Instruction()));
+            },
+          ),
+          ListTile(
+            title: Text(
+              'About',
+              style: TextStyle(
+                fontSize: 15.0,
+              ),
+            ),
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => About()));
               //Add the code for navigation
             },
           ),
           ListTile(
-            title: Text('Admin Portal'),
+            title: Text(
+              'Admin Portal',
+              style: TextStyle(
+                fontSize: 15.0,
+              ),
+            ),
             onTap: () {
               Navigator.push(
                 context,
@@ -121,25 +150,24 @@ class _DrawerPageState extends State<DrawerPage> {
             },
           ),
           ListTile(
-            title: Text('Update Primary Location'),
+            title: Text(
+              'Vaccination',
+              style: TextStyle(
+                fontSize: 15.0,
+              ),
+            ),
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => LocationPage(email: widget.email)));
-            },
-          ),
-           ListTile(
-            title: Text('Instruction'),
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => Instruction()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Vaccination()));
             },
           ),
           ListTile(
-            title: Text('Log Out'),
+            title: Text(
+              'Log Out',
+              style: TextStyle(
+                fontSize: 15.0,
+              ),
+            ),
             onTap: () {
               void logoutUser() async {
                 SharedPreferences prefs = await SharedPreferences.getInstance();

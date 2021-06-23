@@ -129,6 +129,24 @@ class _PopUpState extends State<PopUp> {
                     });
                   },
                 ),
+                MaterialButton(
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.share,
+                      ),
+                      Text(
+                        'Share',
+                      ),
+                    ],
+                  ),
+                  color: Colors.blue,
+                  onPressed: () {
+                    setState(() {
+                      Navigator.pop(context);
+                    });
+                  },
+                ),
               ],
             ),
             SizedBox(

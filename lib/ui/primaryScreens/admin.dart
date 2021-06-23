@@ -103,6 +103,8 @@ class Admin extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => AdminPanel()));
+                        } else {
+                          print('wrong-password');
                         }
                       } catch (e) {
                         // print(e.code);

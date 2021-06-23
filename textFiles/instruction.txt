@@ -6,18 +6,18 @@
 
 4. Now, you will see a Dashboard of the App. At Center of the screen there is a "SOS" Button. If and Only If you are in Emergency Press this button and your request will be sent to people within radius of 2km.
 
-5. Also bottom right corner you will see bell icon where you find the requests sent by someone who will be in emergency.then if you want to help you can click on that request you will see a bottomsheet where you can accept the request.
+5. Also bottom right corner you will see bell icon where you find the requests sent by someone who will be in emergency.then if you want to help you can click on that request you will see a Bottomsheet where you can accept the request.
 
-6. On that bottomsheet you will see details of teh victim with contact No. and even if you want to help you can press "Navigate" button to go to the emergency location.
+6. On that Bottomsheet you will see details of the victim with contact No. and even if you want to help you can press "Navigate" button to go to the emergency location.
 
-7. If you press that "sos" button by mistake you can click on "cross" symbol button then your request got deleted from database.
+7. If you press that "sos" button by mistake you can click on "cross" symbol button then your request will be deleted.
 
 8. On left top corner in Appbar there is a Navigation Menu from which u can access below features :
    
    a) Covid News [You can see Health related news from verified sources no need to go anywhere].
    b) Covid Tracker [You can see daily updated Covid stats like no. of recovered, confirmed, and Deaths].
-   c) Emergency Helpline [You can all state helpline numbers in India, You can call directly through the app].
-   d) Reuirements for needs [You can fill your details and select what are your medical needs and after pressing "Post" your request will be sent to Verified NGO's who are willing to help,They will contact you asap].
+   c) Emergency Helpline [You can access all state helpline numbers in India, You can call directly through the app].
+   d) Requirements for needs [You can fill your details and select what are your medical needs and after pressing "Post" your request will be sent to Verified NGO's who are willing to help,They will contact you asap].
    e) Admin Portal [Not for users Only for Administration]
    f) NGO [You can see your needs you posted if its successfully posted you will see them here].
    g) About [Our Developers info and copyright policies are mentioned here].

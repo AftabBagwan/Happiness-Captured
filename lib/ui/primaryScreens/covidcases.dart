@@ -9,20 +9,25 @@ class Covid {
   int deaths;
   String lastupdate;
 
-  Covid({this.confvalue, this.recvalue, this.deaths, this.lastupdate});
+  Covid({
+    this.confvalue,
+    this.recvalue,
+    this.deaths,
+    this.lastupdate,
+  });
 
   factory Covid.fromJson(Map<dynamic, dynamic> json) {
     return Covid(
-      confvalue: json['confirmed']['value'] as int,
-      recvalue: json['recovered']['value'] as int,
-      deaths: json['deaths']['value'] as int,
-      lastupdate: json['lastUpdate'] as String,
-    );
+        confvalue: json['confirmed']['value'] as int,
+        recvalue: json['recovered']['value'] as int,
+        deaths: json['deaths']['value'] as int,
+        lastupdate: json['lastUpdate'] as String);
   }
 }
 
 Future<Covid> getIndiaCount() async {
-  final response = await http.get(Uri.parse('https://covid19.mathdro.id/api'));
+  final response = await http
+      .get(Uri.parse('https://covid19.mathdro.id/api/countries/india'));
   return Covid.fromJson(json.decode(response.body));
 }
 
@@ -38,8 +43,7 @@ class _CovidCasesState extends State<CovidCases> {
   @override
   void initState() {
     super.initState();
-    
-    refreshList();
+    // refreshList();
     loadcount();
   }
 
@@ -59,20 +63,19 @@ class _CovidCasesState extends State<CovidCases> {
       });
     }
 
-    // return null;
+    return null;
   }
 
-  Future < void > loadcount() async {
-  setState(() {
-    countingload = true;
-  });
-  covidres = await getIndiaCount();
-  print("covid deaths is" + covidres.deaths.toString());
-  setState(() {
-    countingload = false;
-  });
-}
-  
+  Future<void> loadcount() async {
+    setState(() {
+      countingload = true;
+    });
+    covidres = await getIndiaCount();
+    setState(() {
+      countingload = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +83,7 @@ class _CovidCasesState extends State<CovidCases> {
         backgroundColor: Colors.red,
         title: Text("Covid Tracker"),
       ),
-      body:Container(
+      body: Container(
         padding: EdgeInsets.all(8),
         child: Container(
           padding: EdgeInsets.all(10),
@@ -105,14 +108,12 @@ class _CovidCasesState extends State<CovidCases> {
               Divider(),
               Row(
                 children: [
-                 
                   Flexible(
-                      child:  ListTile(
+                      child: ListTile(
                     title: Text(
                       "LastUpdated:",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                   
                     subtitle: Text(
                       covidres.lastupdate,
                       style: TextStyle(),
@@ -133,5 +134,3 @@ class _CovidCasesState extends State<CovidCases> {
     );
   }
 }
-
-

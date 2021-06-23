@@ -1,0 +1,15 @@
+This App is a mobile based information system. It is designed to cater the needs of our respondent users during emergency.
+
+Any illegal reproduction of this content will result in immediate legal action under section 63 of the Copyright Act 1957.
+
+This app is on stable version 1.0.0
+
+Credits:
+~Designed And Developed By Team Amigos(Aftab Bagwan,Pratik Hire,Janhavi Choudhary).
+~Under Guidance And Mentorship Of @Dr.Vivek Kumar Singh.
+~ThankYou @Mr.Abhijeet Kushwaha for guiding and supporting.
+~Logo designed by @Varun Ghorpade.
+~SOS page designed by @Jane Kathryn Teo.
+
+Made with ❤️ by Team Amigos in collaboration with Happiness Captured.
+

@@ -4,9 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csc_picker/csc_picker.dart';
+import 'package:sos/ui/primaryScreens/ngo.dart';
 
 class FormPage extends StatefulWidget {
-
   @override
   _FormPageState createState() => _FormPageState();
 }
@@ -15,10 +15,16 @@ class _FormPageState extends State<FormPage> {
   final CollectionReference formData =
       FirebaseFirestore.instance.collection('formData');
 
-
-  _FormPageState({this.mobileNo,this.age,this.hospitalName,
-    this.description,this.stateValue,this.cityValue,
-    this.name,this.countryValue,this.selectedMedicines});
+  _FormPageState(
+      {this.mobileNo,
+      this.age,
+      this.hospitalName,
+      this.description,
+      this.stateValue,
+      this.cityValue,
+      this.name,
+      this.countryValue,
+      this.selectedMedicines});
   String mobileNo;
   String age;
   String hospitalName;
@@ -38,10 +44,6 @@ class _FormPageState extends State<FormPage> {
     'Oxygen Bed',
     'Others'
   ];
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -273,10 +275,8 @@ class _FormPageState extends State<FormPage> {
                           'age': age,
                           'time': DateTime.now(),
                         });
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => PostHistory()));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => NGO()));
                       }
                     },
                   )

@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
-
 import 'package:http/http.dart' as http;
 // import 'package:timeago/timeago.dart' as timeago;
 
@@ -105,122 +103,120 @@ class _NewsFeedState extends State<NewsFeed> {
                   itemCount: latestnews == null ? 0 : latestnews.length,
                   padding: new EdgeInsets.all(8.0),
                   itemBuilder: (BuildContext context, int index) {
-                    return Expanded(
-                      child: new GestureDetector(
-                        child: new Card(
-                          elevation: 1.7,
-                          child: new Padding(
-                            padding: new EdgeInsets.all(10.0),
-                            child: new Column(
-                              children: [
-                                new Row(
-                                  children: [
-                                    // new Padding(
-                                    //   padding: new EdgeInsets.only(left: 4.0),
-                                    //   child: new Text(
-                                    //     timeago.format(DateTime.parse(
-                                    //         latestnews[index]
-                                    //             .publishedAt
-                                    //             .toString())),
-                                    //     style: new TextStyle(
-                                    //       fontWeight: FontWeight.w400,
-                                    //       color: Colors.grey[600],
-                                    //     ),
-                                    //   ),
-                                    // ),
-                                    new Padding(
-                                      padding: new EdgeInsets.all(5.0),
-                                      child: new Text(
-                                        latestnews[index].sourcename != null
-                                            ? latestnews[index].sourcename
-                                            : "NDTV",
-                                        style: new TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.blue[700],
-                                        ),
+                    return new GestureDetector(
+                      child: new Card(
+                        elevation: 1.7,
+                        child: new Padding(
+                          padding: new EdgeInsets.all(10.0),
+                          child: new Column(
+                            children: [
+                              new Row(
+                                children: [
+                                  // new Padding(
+                                  //   padding: new EdgeInsets.only(left: 4.0),
+                                  //   child: new Text(
+                                  //     timeago.format(DateTime.parse(
+                                  //         latestnews[index]
+                                  //             .publishedAt
+                                  //             .toString())),
+                                  //     style: new TextStyle(
+                                  //       fontWeight: FontWeight.w400,
+                                  //       color: Colors.grey[600],
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  new Padding(
+                                    padding: new EdgeInsets.all(5.0),
+                                    child: new Text(
+                                      latestnews[index].sourcename != null
+                                          ? latestnews[index].sourcename
+                                          : "NDTV",
+                                      style: new TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.blue[700],
                                       ),
                                     ),
-                                  ],
-                                ),
-                                new Row(
-                                  children: [
-                                    new Expanded(
-                                      child: new GestureDetector(
-                                        child: new Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            new Padding(
-                                              padding: new EdgeInsets.only(
-                                                  left: 4.0,
-                                                  right: 8.0,
-                                                  bottom: 8.0,
-                                                  top: 8.0),
-                                              child: new Text(
-                                                latestnews[index]
-                                                            .title
-                                                            .toString() !=
-                                                        null
-                                                    ? latestnews[index]
-                                                        .title
-                                                        .toString()
-                                                    : "Corona Virus",
-                                                style: new TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                  ),
+                                ],
+                              ),
+                              new Row(
+                                children: [
+                                  new Expanded(
+                                    child: new GestureDetector(
+                                      child: new Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          new Padding(
+                                            padding: new EdgeInsets.only(
+                                                left: 4.0,
+                                                right: 8.0,
+                                                bottom: 8.0,
+                                                top: 8.0),
+                                            child: new Text(
+                                              latestnews[index]
+                                                          .title
+                                                          .toString() !=
+                                                      null
+                                                  ? latestnews[index]
+                                                      .title
+                                                      .toString()
+                                                  : "Corona Virus",
+                                              style: new TextStyle(
+                                                fontWeight: FontWeight.bold,
                                               ),
-                                            ),
-                                            new Padding(
-                                              padding: new EdgeInsets.only(
-                                                  left: 4.0,
-                                                  right: 4.0,
-                                                  bottom: 4.0),
-                                              child: new Text(
-                                                latestnews[index].description !=
-                                                        null
-                                                    ? latestnews[index]
-                                                        .description
-                                                    : "",
-                                                style: new TextStyle(
-                                                  color: Colors.grey[500],
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      DescriptionPage(
-                                                          latestnews[index]
-                                                              .launchurl
-                                                              .toString())));
-                                        },
-                                      ),
-                                    ),
-                                      new Column(
-                                      children: <Widget>[
-                                        new Padding(
-                                          padding: new EdgeInsets.only(top: 8.0),
-                                          child: new SizedBox(
-                                            height: 100.0,
-                                            width: 100.0,
-                                            child: new Image.network(
-                                              latestnews[index].url != null
-                                                  ? latestnews[index].url
-                                                  : "https://image.shutterstock.com/image-vector/illustration-flat-icon-tv-channel-260nw-482689633.jpg",
-                                              fit: BoxFit.cover,
                                             ),
                                           ),
+                                          new Padding(
+                                            padding: new EdgeInsets.only(
+                                                left: 4.0,
+                                                right: 4.0,
+                                                bottom: 4.0),
+                                            child: new Text(
+                                              latestnews[index].description !=
+                                                      null
+                                                  ? latestnews[index]
+                                                      .description
+                                                  : "",
+                                              style: new TextStyle(
+                                                color: Colors.grey[500],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DescriptionPage(
+                                                        latestnews[index]
+                                                            .launchurl
+                                                            .toString())));
+                                      },
+                                    ),
+                                  ),
+                                  new Column(
+                                    children: <Widget>[
+                                      new Padding(
+                                        padding: new EdgeInsets.only(top: 8.0),
+                                        child: new SizedBox(
+                                          height: 100.0,
+                                          width: 100.0,
+                                          child: new Image.network(
+                                            latestnews[index].url != null
+                                                ? latestnews[index].url
+                                                : "https://image.shutterstock.com/image-vector/illustration-flat-icon-tv-channel-260nw-482689633.jpg",
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ),
