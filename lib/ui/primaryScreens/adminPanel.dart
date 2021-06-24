@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sos/components/appBar.dart';
+import 'package:sos/components/constants.dart';
 
 class AdminPanel extends StatelessWidget {
+  static const String id = 'adminPanel';
   final _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Happiness Captured',
-        ),
-        backgroundColor: Color(0xfff12d4e),
-      ),
+      appBar: appBar(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -31,10 +29,7 @@ class AdminPanel extends StatelessWidget {
                 },
                 child: Text(
                   'Delete User Request',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: kButtonTextStyle,
                 ),
               ),
             ),
@@ -65,10 +60,7 @@ class AdminPanel extends StatelessWidget {
               },
               child: Text(
                 'Delete NGO Request',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: kButtonTextStyle,
               ),
             ),
           ),

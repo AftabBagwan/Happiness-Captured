@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 class About extends StatefulWidget {
+  static const String id = 'about';
   @override
   _AboutState createState() => _AboutState();
 }

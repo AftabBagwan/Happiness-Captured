@@ -36,7 +36,6 @@ dependencies:
   shared_preferences: ^2.0.6
   maps_launcher: ^2.0.0
   csc_picker: ^0.2.5
-  uuid: ^3.0.4
   http: ^0.13.3
   url_launcher: ^6.0.6
   flutter_webview_plugin:

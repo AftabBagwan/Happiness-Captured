@@ -76,7 +76,7 @@ class NotificationUI extends StatelessWidget {
                   "Mobile No: " + mobileNo,
                 ),
                 Text(
-                  "Distance: " + distance.toString(),
+                  "Distance: " + distance.round().toString() + "KM",
                 )
               ],
             ),

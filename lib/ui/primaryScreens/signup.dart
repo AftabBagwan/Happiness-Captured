@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:sos/components/constants.dart';
 import 'locationPage.dart';
 import 'signin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sos/components/text.dart';
+import 'package:sos/components/fieldDecoration.dart';
 
 class SignUp extends StatelessWidget {
-  final _auth = FirebaseAuth.instance;
   static const String id = 'signup';
+  final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
@@ -24,20 +27,11 @@ class SignUp extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Create Account,',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
+                BigText(
+                  bigText: 'Create Account,',
                 ),
-                Text(
-                  'Sign up to get started!',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey,
-                  ),
+                SmallText(
+                  smallText: 'Sign up to get started!',
                 ),
                 SizedBox(
                   height: 30,
@@ -47,20 +41,8 @@ class SignUp extends StatelessWidget {
                     name = value;
                   },
                   textAlign: TextAlign.center,
-                  decoration: InputDecoration(
-                    prefixIcon: new Icon(
-                      Icons.account_circle,
-                      size: 30,
-                    ),
-                    hintText: 'Enter your name',
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 25.0, horizontal: 30.0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
-                      ),
-                    ),
-                  ),
+                  decoration: decoration(
+                      icon: Icons.account_circle, text: 'Enter your name'),
                 ),
                 SizedBox(
                   height: 30,
@@ -70,32 +52,20 @@ class SignUp extends StatelessWidget {
                     mobileNumber = value;
                   },
                   textAlign: TextAlign.center,
-                  decoration: InputDecoration(
-                    prefixIcon: new Icon(
-                      Icons.account_circle,
-                      size: 30,
-                    ),
-                    hintText: 'Enter your mobile number',
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 25.0, horizontal: 30.0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
-                      ),
-                    ),
-                  ),
+                  decoration: decoration(
+                      icon: Icons.phone, text: 'Enter your mobile number'),
                 ),
                 SizedBox(
                   height: 30,
                 ),
                 TextField(
-                  onChanged: (value) {
-                    email = value;
-                  },
-                  keyboardType: TextInputType.emailAddress,
-                  textAlign: TextAlign.center,
-                  decoration: decoration(text:"Enter your Email", icon: Icons.person)
-                ),
+                    onChanged: (value) {
+                      email = value;
+                    },
+                    keyboardType: TextInputType.emailAddress,
+                    textAlign: TextAlign.center,
+                    decoration: decoration(
+                        text: "Enter your Email", icon: Icons.person)),
                 SizedBox(
                   height: 30,
                 ),
@@ -105,9 +75,9 @@ class SignUp extends StatelessWidget {
                   },
                   obscureText: true,
                   textAlign: TextAlign.center,
-                  decoration: decoration(text: "Enter Your Password" , icon: Icons.lock),
+                  decoration:
+                      decoration(text: "Enter Your Password", icon: Icons.lock),
                 ),
-
                 SizedBox(
                   height: 30,
                 ),
@@ -131,10 +101,6 @@ class SignUp extends StatelessWidget {
                               'name': name,
                               'time': DateTime.now(),
                             });
-                            // _firestore
-                            //     .collection('request')
-                            //     .doc('$email')
-                            //     .set({});
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -142,32 +108,12 @@ class SignUp extends StatelessWidget {
                                         email: email,
                                       )),
                             );
-
-                            // _firestore
-                            //     .collection('database')
-                            //     .doc('$email')
-                            //     .set({
-                            //   'email': email,
-                            //   'mobile': mobileNumber,
-                            //   'name': name,
-                            // });
                           }
-                        } catch (e) {
-                          print(e);
-                        }
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => Dashboard(),
-                        //   ),
-                        // );
+                        } catch (e) {}
                       },
                       child: Text(
                         'SignUp',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: kButtonTextStyle,
                       ),
                     ),
                   ),
@@ -177,66 +123,24 @@ class SignUp extends StatelessWidget {
                   children: [
                     Text(
                       'I`m already a member,',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: kDescriptionStyle,
                     ),
                     TextButton(
-                      // onPressed: onPressed, child: child
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SignIn(),
-                          ),
-                        );
+                        Navigator.pushNamed(context, SignIn.id);
                       },
                       child: Text(
                         'Sign In',
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: kTextButtonStyle,
                       ),
                     )
                   ],
                 ),
-                // TextButton(
-                //   // onPressed: onPressed, child: child
-                //   onPressed: () => Navigator.pushNamed(context, "/"),
-                //   child: Text(
-                //     'Sign In',
-                //     style: TextStyle(
-                //       color: Color(0xffffa086),
-                //       fontSize: 15,
-                //       fontWeight: FontWeight.bold,
-                //     ),
-                //   ),
-                // )
               ],
             ),
           ),
         ),
       ),
     );
-  }
-
-  InputDecoration decoration( {IconData icon, String text}) {
-    return InputDecoration(
-                  prefixIcon: new Icon(
-                    icon,
-                    size: 30,
-                  ),
-                  hintText: text,
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 25.0, horizontal: 30.0),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(20),
-                    ),
-                  ),
-                );
   }
 }

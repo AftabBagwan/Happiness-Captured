@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'signin.dart';
 
 class LocationPage extends StatefulWidget {
+  static const String id = 'locationPage';
   LocationPage({Key key, @required this.email}) : super(key: key);
   final String email;
   @override
@@ -92,8 +93,6 @@ class _LocationPageState extends State<LocationPage> {
                         var addresses = await Geocoder.local
                             .findAddressesFromCoordinates(coordinates);
                         var first = addresses.first;
-
-                        print("${first.featureName} : ${first.addressLine}");
                         setState(() {
                           finalAddress =
                               "${first.featureName} : ${first.addressLine}";
@@ -126,11 +125,7 @@ class _LocationPageState extends State<LocationPage> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SignIn(),
-                            ));
+                        Navigator.pushNamed(context, SignIn.id);
                         _firestore
                             .collection('database')
                             .doc('$userEmail')

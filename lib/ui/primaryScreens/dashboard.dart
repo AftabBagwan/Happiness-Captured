@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sos/components/appBar.dart';
 import 'package:sos/ui/secondaryScreens/drawerpage.dart';
 import 'package:sos/ui/primaryScreens/requestAccepted.dart';
 import 'request.dart';
@@ -8,9 +9,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:geocoder/geocoder.dart';
 import '../../components/actionButton.dart';
 import 'package:sos/components/dashboardText.dart';
-// import 'package:uuid/uuid.dart';
 
 class Dashboard extends StatefulWidget {
+  static const String id = 'dashboard';
   @override
   _DashboardState createState() => _DashboardState();
 }
@@ -26,6 +27,7 @@ class _DashboardState extends State<Dashboard> {
   var mobileNo;
   var data;
   var key;
+
   @override
   void initState() {
     super.initState();
@@ -57,18 +59,14 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+    String userEmail = loggedInUser.email;
     return Scaffold(
       drawer: DrawerPage(
         name: name,
         email: loggedInUser.email,
       ),
       backgroundColor: hasBeenPressed ? Color(0xfff85c4d) : Colors.white,
-      appBar: AppBar(
-        backgroundColor: Color(0xfff12d4e),
-        title: Text(
-          'Happiness Captured',
-        ),
-      ),
+      appBar: appBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -99,16 +97,32 @@ class _DashboardState extends State<Dashboard> {
                 _firestore..collection('request').doc('$key').delete();
               },
             ),
-            ActionButton(
+            FloatingActionButton(
               heroTag: 'requestPage',
-              hasBeenPressed: hasBeenPressed,
-              icon: Icon(
+              backgroundColor: hasBeenPressed ? Colors.white : Colors.red,
+              child: Icon(
                 Icons.notifications,
                 color: hasBeenPressed ? Colors.red : Colors.white,
               ),
-              page: Request(
-                uid: loggedInUser.email,
-              ),
+              onPressed: () async {
+                Position position1 = await Geolocator.getCurrentPosition(
+                    desiredAccuracy: LocationAccuracy.bestForNavigation);
+                _firestore
+                    .collection('userCurrentCoordinates')
+                    .doc(userEmail)
+                    .set({
+                  'latitude': position1.latitude,
+                  'longitude': position1.longitude,
+                });
+
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Request(
+                        uid: loggedInUser.email,
+                      ),
+                    ));
+              },
             )
           ],
         ),
@@ -122,80 +136,19 @@ class _DashboardState extends State<Dashboard> {
                 setState(() {
                   counter++;
                 });
-                if (counter == 3) {
+                if (counter == 2) {
                   bool isLocationServiceEnabled =
                       await Geolocator.isLocationServiceEnabled();
                   if (isLocationServiceEnabled) {
                     hasBeenPressed = true;
                     Position position2 = await Geolocator.getCurrentPosition(
                         desiredAccuracy: LocationAccuracy.bestForNavigation);
-                    print(position2);
                     final coordinates = new Coordinates(
                         position2.latitude, position2.longitude);
                     var addresses = await Geocoder.local
                         .findAddressesFromCoordinates(coordinates);
                     var first = addresses.first;
-                    print("${first.featureName} : ${first.addressLine}");
                     request = "${first.featureName} : ${first.addressLine}";
-
-                    // var batch = _firestore.batch();
-
-                    // batch.set(
-                    //     _firestore
-                    //         .collection('database')
-                    //         .doc()
-                    //         .collection('requests')
-                    //         .doc(),
-                    //     {
-                    //       'address': request,
-                    //       'sender': loggedInUser.email,
-                    //       'name': name,
-                    //       'mobile': mobileNo,
-                    //       'latitude': position.latitude,
-                    //       'longitude': position.longitude,
-                    //     });
-                    // batch.commit();
-                    //
-                    // var requests =
-                    //     _firestore.collection("database").doc("$data");
-
-                    // requests.update
-
-                    // requests.update({
-                    //   request1: firebase.firestore.FieldValue.arrayUnion("greater_virginia")
-                    // });
-
-                    // var docData = {
-                    //   [
-                    //     'address: $request',
-                    //     'sender: $loggedInUser.email',
-                    //     'name: $name',
-                    //     'mobile: $mobileNo',
-                    //     'latitude: $position.latitude',
-                    //     'longitude: $position.longitude',
-                    //   ]
-                    // };
-
-                    // var docData = {
-                    //   stringExample: "Hello world!",
-                    //   booleanExample: true,
-                    //   numberExample: 3.14159265,
-                    //   dateExample: firebase.firestore.Timestamp
-                    //       .fromDate(new Date("December 10, 1815")),
-                    //   arrayExample: [5, true, "hello"],
-                    //   nullExample: null,
-                    //   objectExample: {
-                    //     a: 5,
-                    //     b: {nested: "foo"}
-                    //   }
-                    // };
-
-                    // _firestore.collection("database").doc("$data").set(docData);
-                    // requests.update({
-                    //   request: FieldValue
-                    //       .arrayUnion("greater_virginia")
-                    // });
-
                     key = UniqueKey();
 
                     _firestore.collection('request').doc("$key").set({
@@ -208,51 +161,8 @@ class _DashboardState extends State<Dashboard> {
                       "messageTime": DateTime.now(),
                       'AcceptedBy': '',
                     });
-
-                    // var ref = _firestore.collection('request').;
-                    // var now = DateTime.now();
-                    // var cutoff = now.millisecond - 2 * 60 * 60 * 1000;
-                    // var old = ref.orderByChild('messageTime').endAt(cutoff).limitToLast(1);
-                    // var listener = old.on('child_added', function(snapshot) {
-                    // snapshot.ref.remove();
-                    // });
-
-                    // _firestore.collection(collectionPath).set({
-                    //   name: "Frank",
-                    //   favorites: { food: "Pizza", color: "Blue", subject: "recess" },
-                    //   age: 12
-                    // });
-
-                    // Batch wise update also field map
-                    // Future<void> batchUpdate() {
-                    //   WriteBatch batch = FirebaseFirestore.instance.batch();
-                    //   var v1 = uuid.v1();
-                    //   return _firestore
-                    //       .collection('request')
-                    //       .get()
-                    //       .then((querySnapshot) {
-                    //     querySnapshot.docs.forEach((document) {
-                    //       batch.update(document.reference, {
-                    //         '$v1': {
-                    //           'address': request,
-                    //           'sender': loggedInUser.email,
-                    //           'name': name,
-                    //           'mobile': mobileNo,
-                    //           'latitude': position.latitude,
-                    //           'longitude': position.longitude,
-                    //         }
-                    //       });
-                    //     });
-                    //
-                    //     return batch.commit();
-                    //   });
-                    // }
-
-                    // batchUpdate();
                   } else {
-                    // ignore: unused_local_variable
-                    LocationPermission permission =
-                        await Geolocator.requestPermission();
+                    await Geolocator.requestPermission();
                   }
                 }
               },
@@ -291,7 +201,6 @@ class _DashboardState extends State<Dashboard> {
                 ? 'Please standby, we are currently requesting for help.'
                 : 'After pressing the SOS button three times, we will contact the nearest person or volunteer !',
             color: hasBeenPressed ? Colors.white : Colors.red,
-            // 'After pressing the SOS button, we will contact the nearest person or volunteer !',
           ),
         ],
       ),

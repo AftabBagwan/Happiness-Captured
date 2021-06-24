@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sos/components/constants.dart';
+import 'package:sos/components/appBar.dart';
 
 class NGO extends StatelessWidget {
+  static const String id = 'ngo';
+
   final _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xfff12d4e),
-        title: Text(
-          'Happiness Captured',
-        ),
-      ),
+      appBar: appBar(),
       body: SafeArea(
         child: Column(
           children: [
@@ -44,78 +43,28 @@ class NGO extends StatelessWidget {
                                   vertical: 10, horizontal: 20),
                               child: Column(
                                 children: [
+                                  Text("Name : " + data['name'],
+                                      style: kNgoStyle),
+                                  Text("Mobile No : " + data['mobileNo'],
+                                      style: kNgoStyle),
+                                  Text("State :" + data['state'],
+                                      style: kNgoStyle),
+                                  Text("Description : " + data['description'],
+                                      style: kNgoStyle),
+                                  Text("City : " + data['city'],
+                                      style: kNgoStyle),
+                                  Text("Age : " + data['age'],
+                                      style: kNgoStyle),
                                   Text(
-                                    "Name : " + data['name'],
-                                    style: TextStyle(
-                                      fontSize: 20.0,
-                                    ),
-                                  ),
-                                  Text(
-                                    "Mobile No : " + data['mobileNo'],
-                                    style: TextStyle(
-                                      fontSize: 20.0,
-                                    ),
-                                  ),
-                                  Text(
-                                    "State :" + data['state'],
-                                    style: TextStyle(
-                                      fontSize: 20.0,
-                                    ),
-                                  ),
-                                  Text(
-                                    "Description : " + data['description'],
-                                    style: TextStyle(
-                                      fontSize: 20.0,
-                                    ),
-                                  ),
-                                  Text(
-                                    "City : " + data['city'],
-                                    style: TextStyle(
-                                      fontSize: 20.0,
-                                    ),
-                                  ),
-                                  Text(
-                                    "Age : " + data['age'],
-                                    style: TextStyle(
-                                      fontSize: 20.0,
-                                    ),
-                                  ),
-                                  Text(
-                                    "Requirements : " +
-                                        data['selectedMedicine'],
-                                    style: TextStyle(
-                                      fontSize: 20.0,
-                                    ),
-                                  ),
+                                      "Requirements : " +
+                                          data['selectedMedicine'],
+                                      style: kNgoStyle),
                                 ],
                               ),
                             ),
                           ),
                         );
                       },
-
-                      // return NotificationUI(
-                      //   address: data['city'],
-                      //   name: data['name'],
-                      //   mobileNo: data['mobileNo'],
-                      //
-                      //   // distance: Geolocator.distanceBetween(
-                      //   //         request['latitude'],
-                      //   //         request['longitude'],
-                      //   //         19.920600079349757,
-                      //   //         75.01306136879904) /
-                      //   //     1000,
-                      //   // uid: request.id,
-                      //   // userEmail: uid,
-                      //   // requestLatitude: request['latitude'],
-                      //   // requestLongitude: request['longitude'],
-                      //   // name: uid,
-                      //   // name: _firestore
-                      //   //     .collection('database')
-                      //   //     .doc("$uid")
-                      //   //     .get()
-                      //   //     .then((doc) => doc.data()['name']),
-                      // );
                     ),
                   );
                 }),

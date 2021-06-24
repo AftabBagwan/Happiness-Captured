@@ -5,8 +5,12 @@ import 'package:flutter/widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csc_picker/csc_picker.dart';
 import 'package:sos/ui/primaryScreens/ngo.dart';
+import 'package:sos/components/fieldDecoration.dart';
+import 'package:sos/components/appBar.dart';
 
 class FormPage extends StatefulWidget {
+  static const String id = 'form';
+
   @override
   _FormPageState createState() => _FormPageState();
 }
@@ -37,7 +41,6 @@ class _FormPageState extends State<FormPage> {
   final _formKey = GlobalKey<FormState>();
 
   List<String> _medicines = [
-    'Remedesivir',
     'Plasma',
     'Oxygen Cylinder',
     'Tocilizumab',
@@ -47,11 +50,10 @@ class _FormPageState extends State<FormPage> {
 
   @override
   Widget build(BuildContext context) {
+    stateValue = '';
+    cityValue = '';
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.red,
-        title: Text('Post Your Queries'),
-      ),
+      appBar: appBar(),
       body: Container(
           padding: EdgeInsets.fromLTRB(30, 30, 30, 30),
           child: SingleChildScrollView(
@@ -63,18 +65,16 @@ class _FormPageState extends State<FormPage> {
                     onChanged: (text) {
                       name = text;
                     },
-                    decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.location_history),
-                        floatingLabelBehavior: FloatingLabelBehavior.always,
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
-                        hintText: 'Enter Your Name',
-                        labelText: 'Name',
-                        labelStyle: TextStyle(
-                          color: Colors.red,
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w500,
-                        )),
+                    validator: (newValue) {
+                      if (newValue == null || newValue.isEmpty) {
+                        return 'Please Enter Valid data';
+                      }
+                      return null;
+                    },
+                    decoration: formFieldDecoration(
+                        icon: Icons.account_circle,
+                        hintText: 'Enter your name',
+                        labelText: 'Name'),
                   ),
                   SizedBox(height: 25),
                   TextFormField(
@@ -90,18 +90,11 @@ class _FormPageState extends State<FormPage> {
                     maxLength: 10,
                     maxLengthEnforcement: MaxLengthEnforcement.enforced,
                     keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.phone),
-                        floatingLabelBehavior: FloatingLabelBehavior.always,
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
-                        hintText: 'Enter Your Contact Number',
-                        labelText: 'Mobile Number',
-                        labelStyle: TextStyle(
-                          color: Colors.red,
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w500,
-                        )),
+                    decoration: formFieldDecoration(
+                      icon: Icons.phone,
+                      labelText: 'Mobile Number',
+                      hintText: 'Enter your contact number',
+                    ),
                   ),
                   SizedBox(
                     height: 25.0,
@@ -153,53 +146,38 @@ class _FormPageState extends State<FormPage> {
                     height: 25.0,
                   ),
                   TextFormField(
-                    onChanged: (text) {
-                      hospitalName = text;
-                    },
-                    validator: (newValue) {
-                      if (newValue == null || newValue.isEmpty) {
-                        return 'Please Enter Valid data';
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                        floatingLabelBehavior: FloatingLabelBehavior.always,
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
-                        hintText: 'Name Of the hospital',
+                      onChanged: (text) {
+                        hospitalName = text;
+                      },
+                      validator: (newValue) {
+                        if (newValue == null || newValue.isEmpty) {
+                          return 'Please Enter Valid data';
+                        }
+                        return null;
+                      },
+                      decoration: formFieldDecoration(
+                        icon: Icons.local_hospital,
+                        hintText: 'Name of the hospital',
                         labelText: 'Hospital Name',
-                        labelStyle: TextStyle(
-                          color: Colors.red,
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w500,
-                        )),
-                  ),
+                      )),
                   SizedBox(
                     height: 25.0,
                   ),
                   TextFormField(
-                    onChanged: (text) {
-                      age = text;
-                    },
-                    validator: (newValue) {
-                      if (newValue == null || newValue.isEmpty) {
-                        return 'Please Enter Valid data';
-                      }
-                      return null;
-                    },
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        floatingLabelBehavior: FloatingLabelBehavior.always,
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
-                        hintText: 'Age',
-                        labelText: 'Enter Your Age',
-                        labelStyle: TextStyle(
-                          color: Colors.red,
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w500,
-                        )),
-                  ),
+                      onChanged: (text) {
+                        age = text;
+                      },
+                      validator: (newValue) {
+                        if (newValue == null || newValue.isEmpty) {
+                          return 'Please Enter Valid data';
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.number,
+                      decoration: formFieldDecoration(
+                          icon: Icons.calendar_today_sharp,
+                          labelText: 'Age',
+                          hintText: 'Enter your age')),
                   SizedBox(
                     height: 25.0,
                   ),
@@ -209,7 +187,9 @@ class _FormPageState extends State<FormPage> {
                         shape: BoxShape.rectangle,
                         borderRadius: BorderRadius.circular(15.0),
                         border: Border.all(color: Colors.black, width: 0.5)),
-                    child: DropdownButton(
+                    child: DropdownButtonFormField(
+                      validator: (value) =>
+                          value == null ? 'Field required' : null,
                       isExpanded: true,
                       hint: Text('Please choose your requirement'),
                       value: selectedMedicines,
@@ -232,25 +212,21 @@ class _FormPageState extends State<FormPage> {
                   SizedBox(
                     height: 25.0,
                   ),
-                  TextField(
-                    onChanged: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'Enter valid data';
-                      }
-                      description = text;
-                    },
-                    decoration: InputDecoration(
-                        floatingLabelBehavior: FloatingLabelBehavior.always,
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
-                        hintText: 'If others then please mention here',
+                  TextFormField(
+                      onChanged: (text) {
+                        description = text;
+                      },
+                      validator: (newValue) {
+                        if (newValue == null || newValue.isEmpty) {
+                          return 'Please Enter Valid data';
+                        }
+                        return null;
+                      },
+                      decoration: formFieldDecoration(
+                        icon: Icons.details,
+                        hintText: 'Describe the requirement here',
                         labelText: 'Description',
-                        labelStyle: TextStyle(
-                          color: Colors.red,
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w500,
-                        )),
-                  ),
+                      )),
                   SizedBox(
                     height: 40.0,
                   ),
@@ -262,8 +238,10 @@ class _FormPageState extends State<FormPage> {
                     ),
                     onPressed: () {
                       if (_formKey.currentState.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Processing Data')));
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('Processing Data'),
+                          duration: Duration(seconds: 1),
+                        ));
                         formData.add({
                           'name': name,
                           'mobileNo': mobileNo,
@@ -275,8 +253,7 @@ class _FormPageState extends State<FormPage> {
                           'age': age,
                           'time': DateTime.now(),
                         });
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => NGO()));
+                        Navigator.pushNamed(context, NGO.id);
                       }
                     },
                   )

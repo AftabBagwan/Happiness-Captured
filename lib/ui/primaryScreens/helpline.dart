@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sos/components/appBar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HelpLine extends StatefulWidget {
+  static const String id = 'helpline';
   @override
   _HelpLineState createState() => _HelpLineState();
 }
@@ -13,14 +15,7 @@ class _HelpLineState extends State<HelpLine> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "HelpLine Numbers",
-          style: TextStyle(
-              fontWeight: FontWeight.w900, fontStyle: FontStyle.normal),
-        ),
-        backgroundColor: Colors.red[700],
-      ),
+      appBar: appBar(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[

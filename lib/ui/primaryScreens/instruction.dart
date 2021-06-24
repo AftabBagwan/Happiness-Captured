@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:sos/components/appBar.dart';
 
 class Instruction extends StatefulWidget {
-  const Instruction({Key key}) : super(key: key);
-
+  static const String id = 'instruction';
   @override
   _InstructionState createState() => _InstructionState();
 }
@@ -12,7 +12,6 @@ class _InstructionState extends State<Instruction> {
   String data = '';
   fetchFileData() async {
     String responseText;
-
     responseText = await rootBundle.loadString('textFiles/instruction.txt');
     setState(() {
       data = responseText;
@@ -28,9 +27,7 @@ class _InstructionState extends State<Instruction> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            title: Text("How To Use The Application"),
-            backgroundColor: Colors.red),
+        appBar: appBar(),
         body: Container(
           padding: EdgeInsets.all(8.0),
           child: SingleChildScrollView(

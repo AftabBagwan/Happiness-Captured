@@ -1,28 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/painting.dart';
-import 'package:geolocator/geolocator.dart';
-import '../../components/notificationUI.dart';
+import 'package:sos/components/appBar.dart';
+import 'package:sos/components/constants.dart';
 
 class RequestAccepted extends StatelessWidget {
-  @override
-  final _firestore = FirebaseFirestore.instance;
-  void getMessage() {
-    _firestore.collection('request').get().then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        print(doc.data());
-      });
-    });
-  }
+  static const String id = 'requestAccepted';
 
+  final _firestore = FirebaseFirestore.instance;
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xfff12d4e),
-        title: Text(
-          'Happiness Captured',
-        ),
-      ),
+      appBar: appBar(),
       body: SafeArea(
         child: Column(
           children: [
@@ -55,27 +43,14 @@ class RequestAccepted extends StatelessWidget {
                                 SizedBox(
                                   height: 10,
                                 ),
-                                Text(
-                                  'Name:' + request['name'],
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
-                                ),
-                                Text(
-                                  'Mobile No:' + request['mobile'],
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
-                                ),
-                                Text(
-                                  'Accepted By:' + request['AcceptedBy'],
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
-                                ),
+                                Text('Name:' + request['name'],
+                                    style: kRequestAcceptStyle),
+                                Text('Mobile No:' + request['mobile'],
+                                    style: kRequestAcceptStyle),
+                                Text('Accepted By:',
+                                    style: kRequestAcceptStyle),
+                                Text(request['AcceptedBy'],
+                                    style: kRequestAcceptStyle),
                                 SizedBox(
                                   height: 10,
                                 ),

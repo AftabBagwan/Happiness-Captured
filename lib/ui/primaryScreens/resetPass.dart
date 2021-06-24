@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sos/components/constants.dart';
+import 'package:sos/components/fieldDecoration.dart';
 import 'signin.dart';
 
 class ResetPass extends StatefulWidget {
+  static const String id = 'ResetPass';
   @override
   _ResetPassState createState() => _ResetPassState();
 }
@@ -41,19 +44,9 @@ class _ResetPassState extends State<ResetPass> {
                 TextField(
                   keyboardType: TextInputType.emailAddress,
                   textAlign: TextAlign.center,
-                  decoration: InputDecoration(
-                    prefixIcon: new Icon(
-                      Icons.email,
-                      size: 30,
-                    ),
-                    hintText: 'Enter your email',
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 25.0, horizontal: 30.0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20.0),
-                      ),
-                    ),
+                  decoration: decoration(
+                    text: 'Enter your email',
+                    icon: Icons.email,
                   ),
                   onChanged: (value) {
                     _email = value;
@@ -68,8 +61,12 @@ class _ResetPassState extends State<ResetPass> {
                     height: 50,
                     color: Colors.red,
                     child: MaterialButton(
-                      child: Text('Send Email'),
+                      child: Text(
+                        'Send Email',
+                        style: kButtonTextStyle,
+                      ),
                       onPressed: () async {
+                        Navigator.pushNamed(context, SignIn.id);
                         await FirebaseAuth.instance
                             .sendPasswordResetEmail(email: _email);
                       },
@@ -97,14 +94,12 @@ class _ResetPassState extends State<ResetPass> {
                     height: 50,
                     color: Colors.red,
                     child: MaterialButton(
-                        child: Text('Login'),
+                        child: Text(
+                          'Login',
+                          style: kButtonTextStyle,
+                        ),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SignIn(),
-                            ),
-                          );
+                          Navigator.pushNamed(context, SignIn.id);
                         }),
                   ),
                 ),

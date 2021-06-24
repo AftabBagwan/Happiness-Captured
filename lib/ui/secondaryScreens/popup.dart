@@ -6,16 +6,14 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
 
 class PopUp extends StatefulWidget {
-  String name;
-  String address;
-  String mobileNo;
-  String userEmail;
-  // List arr = [];
-  String share;
-  var requestLatitude;
-  var requestLongitude;
-  var uid;
-  // var pratik;
+  static const String id = 'popup';
+  final name;
+  final address;
+  final mobileNo;
+  final userEmail;
+  final requestLatitude;
+  final requestLongitude;
+  final uid;
 
   PopUp({
     Key key,
@@ -23,8 +21,6 @@ class PopUp extends StatefulWidget {
     this.address,
     this.mobileNo,
     this.uid,
-    // this.arr,
-    // this.pratik,
     this.userEmail,
     this.requestLatitude,
     this.requestLongitude,
@@ -47,9 +43,9 @@ class _PopUpState extends State<PopUp> {
   final _firestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
+    String share;
     var lat = widget.requestLatitude;
     var long = widget.requestLongitude;
-    // String address = ,
     return SingleChildScrollView(
       child: Container(
         height: 400,
@@ -77,8 +73,7 @@ class _PopUpState extends State<PopUp> {
             ),
             GestureDetector(
               onTap: () async {
-                var url;
-                await launchCaller(url = widget.mobileNo.toString());
+                await launchCaller(widget.mobileNo.toString());
               },
               child: Text(widget.mobileNo,
                   style: TextStyle(
@@ -110,14 +105,10 @@ class _PopUpState extends State<PopUp> {
                         .collection('request')
                         .doc(widget.uid)
                         .update({'AcceptedBy': widget.userEmail});
-                    print(widget.userEmail);
                     Navigator.pop(context);
                   },
                   //
                 ),
-                // SizedBox(
-                //   width: spacee,
-                // ),
                 MaterialButton(
                   child: Row(
                     children: [
@@ -136,7 +127,6 @@ class _PopUpState extends State<PopUp> {
                     });
                   },
                 ),
-
                 MaterialButton(
                     color: Colors.blue,
                     child: Row(
@@ -148,7 +138,7 @@ class _PopUpState extends State<PopUp> {
                       ],
                     ),
                     onPressed: () {
-                      widget.share = 'Name : ' +
+                      share = 'Name : ' +
                           widget.name +
                           ',' +
                           'Address : ' +
@@ -158,7 +148,7 @@ class _PopUpState extends State<PopUp> {
 
                       final RenderBox box = context.findRenderObject();
 
-                      Share.share(widget.share,
+                      Share.share(share,
                           subject: widget.name,
                           sharePositionOrigin:
                               box.localToGlobal(Offset.zero) & box.size);

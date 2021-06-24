@@ -1,27 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:sos/components/constants.dart';
+import 'package:sos/components/text.dart';
 import 'package:sos/ui/primaryScreens/dashboard.dart';
 import 'package:sos/ui/primaryScreens/resetPass.dart';
 import 'signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sos/components/fieldDecoration.dart';
 
 class SignIn extends StatefulWidget {
+  static const String id = 'signIn';
   @override
   _SignInState createState() => _SignInState();
 }
 
 class _SignInState extends State<SignIn> {
-  @override
   final _auth = FirebaseAuth.instance;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   String email;
   String password;
   var emailText;
   var passwordText;
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      // resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
@@ -30,20 +34,11 @@ class _SignInState extends State<SignIn> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Welcome,',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
-                  ),
+                BigText(
+                  bigText: 'Welcome,',
                 ),
-                Text(
-                  'Sign in to continue!',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey,
-                  ),
+                SmallText(
+                  smallText: 'Sign in to continue!',
                 ),
                 SizedBox(
                   height: 80,
@@ -54,60 +49,26 @@ class _SignInState extends State<SignIn> {
                   },
                   keyboardType: TextInputType.emailAddress,
                   textAlign: TextAlign.center,
-                  decoration: InputDecoration(
-                    errorText: emailText,
-                    prefixIcon: new Icon(
-                      Icons.email,
-                      size: 30,
-                    ),
-                    hintText: 'Enter your email',
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 25.0, horizontal: 30.0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20.0),
-                      ),
-                    ),
-                  ),
+                  decoration: signInFormFieldDecoration(
+                      emailText, Icons.email, 'Enter your email'),
                 ),
                 SizedBox(
                   height: 40,
                 ),
                 TextField(
-                  onChanged: (value) {
-                    password = value;
-                  },
-                  obscureText: true,
-                  textAlign: TextAlign.center,
-                  decoration: InputDecoration(
-                    errorText: passwordText,
-                    prefixIcon: new Icon(
-                      Icons.lock,
-                      size: 30,
-                    ),
-                    hintText: 'Enter your password',
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 25.0, horizontal: 30.0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20.0),
-                      ),
-                    ),
-                  ),
-                ),
+                    onChanged: (value) {
+                      password = value;
+                    },
+                    obscureText: true,
+                    textAlign: TextAlign.center,
+                    decoration: signInFormFieldDecoration(
+                        passwordText, Icons.lock, 'Enter your password')),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton(
-                      //here i have to change the code to make this app responsive because right now i am unable to find the widget for that so i just have used the random measurement according to my device so remember to change that
-                      // onPressed: onPressed, child: child
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ResetPass(),
-                          ),
-                        );
+                        Navigator.pushNamed(context, ResetPass.id);
                       },
                       child: Text(
                         'Forget Password?',
@@ -133,7 +94,7 @@ class _SignInState extends State<SignIn> {
                         prefs?.setBool("isLoggedIn", true);
                         // ignore: deprecated_member_use
                         _scaffoldKey.currentState.showSnackBar(new SnackBar(
-                          duration: new Duration(seconds: 4),
+                          duration: new Duration(seconds: 1),
                           content: new Row(
                             children: <Widget>[
                               new CircularProgressIndicator(),
@@ -142,17 +103,10 @@ class _SignInState extends State<SignIn> {
                           ),
                         ));
                         try {
-                          final newUser =
-                              await _auth.signInWithEmailAndPassword(
-                                  email: email, password: password);
-                          // if (newUser != null) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Dashboard()));
-                          // }
+                          await _auth.signInWithEmailAndPassword(
+                              email: email, password: password);
+                          Navigator.pushNamed(context, Dashboard.id);
                         } catch (e) {
-                          print(e.code);
                           if (e.code == 'wrong-password') {
                             setState(() {
                               passwordText = 'Please check your password';
@@ -164,35 +118,17 @@ class _SignInState extends State<SignIn> {
                           }
                         }
                       },
-                      child: Text(
-                        'Login',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      child: Text('Login', style: kButtonTextStyle),
                     ),
                   ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'I`am a new user,',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                      ),
-                    ),
+                    Text('I`am a new user,', style: kDescriptionStyle),
                     TextButton(
-                      // onPressed: onPressed, child: child
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SignUp(),
-                          ),
-                        );
+                        Navigator.pushNamed(context, SignUp.id);
                       },
                       child: Text(
                         'Sign Up',

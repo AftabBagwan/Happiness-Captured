@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:sos/components/appBar.dart';
 
 class Vaccination extends StatelessWidget {
+  static const String id = 'vaccination';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xfff12d4e),
-        title: Text(
-          'Happiness Captured',
-        ),
-      ),
+      appBar: appBar(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

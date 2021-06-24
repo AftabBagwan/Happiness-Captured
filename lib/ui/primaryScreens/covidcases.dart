@@ -32,6 +32,7 @@ Future<Covid> getIndiaCount() async {
 }
 
 class CovidCases extends StatefulWidget {
+  static const String id = 'covidcases';
   @override
   _CovidCasesState createState() => _CovidCasesState();
 }

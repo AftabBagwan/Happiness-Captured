@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:http/http.dart' as http;
-// import 'package:timeago/timeago.dart' as timeago;
+import 'descriptionPage.dart';
 
 class News {
   String author;
@@ -38,6 +37,8 @@ String api =
     "https://newsapi.org/v2/top-headlines?country=in&category=health&apiKey=354ccddf2535462483ac3f828d25d788";
 
 class NewsFeed extends StatefulWidget {
+  static const String id = 'covidnews';
+
   @override
   _NewsFeedState createState() => _NewsFeedState();
 }
@@ -46,7 +47,6 @@ class _NewsFeedState extends State<NewsFeed> {
   @override
   void initState() {
     super.initState();
-
     refreshList();
   }
 
@@ -77,7 +77,6 @@ class _NewsFeedState extends State<NewsFeed> {
         loading = false;
       });
     }
-
     return null;
   }
 
@@ -112,19 +111,6 @@ class _NewsFeedState extends State<NewsFeed> {
                             children: [
                               new Row(
                                 children: [
-                                  // new Padding(
-                                  //   padding: new EdgeInsets.only(left: 4.0),
-                                  //   child: new Text(
-                                  //     timeago.format(DateTime.parse(
-                                  //         latestnews[index]
-                                  //             .publishedAt
-                                  //             .toString())),
-                                  //     style: new TextStyle(
-                                  //       fontWeight: FontWeight.w400,
-                                  //       color: Colors.grey[600],
-                                  //     ),
-                                  //   ),
-                                  // ),
                                   new Padding(
                                     padding: new EdgeInsets.all(5.0),
                                     child: new Text(
@@ -225,40 +211,5 @@ class _NewsFeedState extends State<NewsFeed> {
                 ),
           onRefresh: refreshList,
         ));
-  }
-}
-
-class DescriptionPage extends StatelessWidget {
-  static String tag = 'description-page';
-
-  DescriptionPage(this.urlnews);
-  final String urlnews;
-
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: new AppBar(
-        title: new Text(
-          "Full Article",
-          style: TextStyle(
-              fontWeight: FontWeight.w900, fontStyle: FontStyle.italic),
-        ),
-        backgroundColor: Colors.red,
-      ),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: WebviewScaffold(
-          url: urlnews,
-          withJavascript: true,
-          hidden: true,
-          initialChild: Container(
-            child: const Center(
-              child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.green)),
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }
