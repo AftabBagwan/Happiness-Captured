@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:sos/components/appBar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HelpLine extends StatefulWidget {
@@ -15,7 +14,11 @@ class _HelpLineState extends State<HelpLine> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(),
+      appBar: AppBar(
+        title: Text(
+          'Medical Emergency Numbers',
+        ),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[

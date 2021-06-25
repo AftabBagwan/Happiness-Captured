@@ -7,6 +7,7 @@ This app is on stable version 1.0.0
 Credits:
 ~Designed And Developed By Team Amigos(Aftab Bagwan,Pratik Hire,Janhavi Choudhary).
 ~Under Guidance And Mentorship Of @Dr.Vivek Kumar Singh.
+~Technical support by @Aman Gautam
 ~ThankYou @Mr.Abhijeet Kushwaha for guiding and supporting.
 ~Logo designed by @Varun Ghorpade.
 ~SOS page designed by @Jane Kathryn Teo.

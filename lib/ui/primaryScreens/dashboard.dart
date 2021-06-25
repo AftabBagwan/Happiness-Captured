@@ -150,7 +150,6 @@ class _DashboardState extends State<Dashboard> {
                   var first = addresses.first;
                   request = "${first.featureName} : ${first.addressLine}";
                   key = UniqueKey();
-
                   _firestore.collection('request').doc("$key").set({
                     'address': request,
                     'sender': loggedInUser.email,

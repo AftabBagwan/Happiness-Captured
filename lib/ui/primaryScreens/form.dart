@@ -71,7 +71,7 @@ class _FormPageState extends State<FormPage> {
                     },
                     decoration: formFieldDecoration(
                         icon: Icons.account_circle,
-                        hintText: 'Enter your name',
+                        hintText: 'Enter patients name',
                         labelText: 'Name'),
                   ),
                   SizedBox(height: 25),
@@ -175,7 +175,7 @@ class _FormPageState extends State<FormPage> {
                       decoration: formFieldDecoration(
                           icon: Icons.calendar_today_sharp,
                           labelText: 'Age',
-                          hintText: 'Enter your age')),
+                          hintText: 'Enter patients age')),
                   SizedBox(
                     height: 25.0,
                   ),

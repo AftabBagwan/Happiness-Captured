@@ -7,10 +7,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sos/components/text.dart';
 import 'package:sos/components/fieldDecoration.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
   static const String id = 'signup';
+
+  @override
+  _SignUpState createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
   final _auth = FirebaseAuth.instance;
+
   final _firestore = FirebaseFirestore.instance;
+
+  bool isError = false;
+
   @override
   Widget build(BuildContext context) {
     String email;
@@ -64,8 +74,21 @@ class SignUp extends StatelessWidget {
                     },
                     keyboardType: TextInputType.emailAddress,
                     textAlign: TextAlign.center,
-                    decoration: decoration(
-                        text: "Enter your Email", icon: Icons.person)),
+                    decoration: InputDecoration(
+                      prefixIcon: new Icon(
+                        Icons.account_circle,
+                        size: 30,
+                      ),
+                      hintText: 'Enter your email',
+                      errorText: isError ? 'Email already exist' : null,
+                      contentPadding: EdgeInsets.symmetric(
+                          vertical: 25.0, horizontal: 30.0),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20),
+                        ),
+                      ),
+                    )),
                 SizedBox(
                   height: 30,
                 ),
@@ -89,8 +112,9 @@ class SignUp extends StatelessWidget {
                     child: MaterialButton(
                       onPressed: () async {
                         try {
-                          final newUser = _auth.createUserWithEmailAndPassword(
-                              email: email, password: password);
+                          final newUser =
+                              await _auth.createUserWithEmailAndPassword(
+                                  email: email, password: password);
                           if (newUser != null) {
                             _firestore
                                 .collection('database')
@@ -109,7 +133,11 @@ class SignUp extends StatelessWidget {
                                       )),
                             );
                           }
-                        } catch (e) {}
+                        } catch (e) {
+                          setState(() {
+                            isError = true;
+                          });
+                        }
                       },
                       child: Text(
                         'SignUp',
