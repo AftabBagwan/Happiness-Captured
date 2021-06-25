@@ -18,6 +18,7 @@ class _HelpLineState extends State<HelpLine> {
         title: Text(
           'Medical Emergency Numbers',
         ),
+        backgroundColor: Color(0xfff12d4e),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
