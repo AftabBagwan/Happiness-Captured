@@ -136,34 +136,34 @@ class _DashboardState extends State<Dashboard> {
                 setState(() {
                   counter++;
                 });
-                if (counter == 2) {
-                  bool isLocationServiceEnabled =
-                      await Geolocator.isLocationServiceEnabled();
-                  if (isLocationServiceEnabled) {
-                    hasBeenPressed = true;
-                    Position position2 = await Geolocator.getCurrentPosition(
-                        desiredAccuracy: LocationAccuracy.bestForNavigation);
-                    final coordinates = new Coordinates(
-                        position2.latitude, position2.longitude);
-                    var addresses = await Geocoder.local
-                        .findAddressesFromCoordinates(coordinates);
-                    var first = addresses.first;
-                    request = "${first.featureName} : ${first.addressLine}";
-                    key = UniqueKey();
+                if (counter == 3) {
+                  // bool isLocationServiceEnabled =
+                  //     await Geolocator.isLocationServiceEnabled();
+                  // if (isLocationServiceEnabled) {
+                  hasBeenPressed = true;
+                  Position position2 = await Geolocator.getCurrentPosition(
+                      desiredAccuracy: LocationAccuracy.bestForNavigation);
+                  final coordinates =
+                      new Coordinates(position2.latitude, position2.longitude);
+                  var addresses = await Geocoder.local
+                      .findAddressesFromCoordinates(coordinates);
+                  var first = addresses.first;
+                  request = "${first.featureName} : ${first.addressLine}";
+                  key = UniqueKey();
 
-                    _firestore.collection('request').doc("$key").set({
-                      'address': request,
-                      'sender': loggedInUser.email,
-                      'name': name,
-                      'mobile': mobileNo,
-                      'latitude': position2.latitude,
-                      'longitude': position2.longitude,
-                      "messageTime": DateTime.now(),
-                      'AcceptedBy': '',
-                    });
-                  } else {
-                    await Geolocator.requestPermission();
-                  }
+                  _firestore.collection('request').doc("$key").set({
+                    'address': request,
+                    'sender': loggedInUser.email,
+                    'name': name,
+                    'mobile': mobileNo,
+                    'latitude': position2.latitude,
+                    'longitude': position2.longitude,
+                    "messageTime": DateTime.now(),
+                    'AcceptedBy': '',
+                  });
+                  // } else {
+                  //   await Geolocator.requestPermission();
+                  // }
                 }
               },
               child: Container(

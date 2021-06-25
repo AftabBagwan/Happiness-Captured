@@ -33,8 +33,8 @@ class _FormPageState extends State<FormPage> {
   String age;
   String hospitalName;
   String description;
-  String stateValue;
-  String cityValue;
+  String stateValue = '';
+  String cityValue = '';
   String countryValue;
   String name;
   String selectedMedicines;
@@ -50,8 +50,6 @@ class _FormPageState extends State<FormPage> {
 
   @override
   Widget build(BuildContext context) {
-    stateValue = '';
-    cityValue = '';
     return Scaffold(
       appBar: appBar(),
       body: Container(

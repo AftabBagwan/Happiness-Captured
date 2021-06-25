@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 Widget titleWidget(title, subtitle, color) {
   return ListTile(
     title: Text(title,
