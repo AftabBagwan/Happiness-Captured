@@ -33,8 +33,8 @@ class _FormPageState extends State<FormPage> {
   String age;
   String hospitalName;
   String description;
-  String stateValue = '';
-  String cityValue = '';
+  String stateValue;
+  String cityValue;
   String countryValue;
   String name;
   String selectedMedicines;
