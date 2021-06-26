@@ -54,6 +54,7 @@ class _DashboardState extends State<Dashboard> {
     } catch (e) {
       print(e);
     }
+    if(mounted)
     setState(() {});
   }
 
@@ -105,15 +106,15 @@ class _DashboardState extends State<Dashboard> {
                 color: hasBeenPressed ? Colors.red : Colors.white,
               ),
               onPressed: () async {
-                Position position1 = await Geolocator.getCurrentPosition(
-                    desiredAccuracy: LocationAccuracy.bestForNavigation);
-                _firestore
-                    .collection('userCurrentCoordinates')
-                    .doc(userEmail)
-                    .set({
-                  'latitude': position1.latitude,
-                  'longitude': position1.longitude,
-                });
+                // Position position1 = await Geolocator.getCurrentPosition(
+                //     desiredAccuracy: LocationAccuracy.bestForNavigation);
+                // _firestore
+                //     .collection('userCurrentCoordinates')
+                //     .doc(userEmail)
+                //     .set({
+                //   'latitude': position1.latitude,
+                //   'longitude': position1.longitude,
+                // });
 
                 Navigator.push(
                     context,

@@ -26,8 +26,19 @@ class _RequestState extends State<Request> {
 
   var userLat;
   var userLong;
+  final _firestore = FirebaseFirestore.instance;
 
   void userCoordinates() async {
+    Position position1 = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.bestForNavigation);
+    _firestore
+        .collection('userCurrentCoordinates')
+        .doc(loggedInUser.email)
+        .set({
+      'latitude': position1.latitude,
+      'longitude': position1.longitude,
+    });
+
     userLat = await _firestore
         .collection('userCurrentCoordinates')
         .doc(loggedInUser.email)
@@ -38,11 +49,10 @@ class _RequestState extends State<Request> {
         .doc(loggedInUser.email)
         .get()
         .then((doc) => doc.data()['longitude']);
-    setState(() {});
+    if (mounted) setState(() {});
     loading = false;
   }
 
-  final _firestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

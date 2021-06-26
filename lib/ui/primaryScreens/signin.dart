@@ -144,7 +144,7 @@ class _SignInState extends State<SignIn> {
                 SizedBox(
                   height: 20,
                 ),
-                Text('Note: This Application is for testing purpose only'),
+                //Text('Note: This Application is for testing purpose only'),
               ],
             ),
           ),

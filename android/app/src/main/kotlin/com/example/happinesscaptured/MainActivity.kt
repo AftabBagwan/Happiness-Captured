@@ -1,4 +1,4 @@
-package com.example.sos
+package com.happinesscaptured.sos
 
 import io.flutter.embedding.android.FlutterActivity
 
