@@ -5,8 +5,8 @@
 
     <!-- You can insert your own image assets here -->
      <item>
-<!--        <bitmap-->
-<!--            android:gravity="center"-->
-<!--            android:src="@mipmap/ic_launcher" />-->
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/playstore" />
      </item>
 </layer-list>

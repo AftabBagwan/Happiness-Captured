@@ -14,8 +14,8 @@
 
 8. On left top corner in Appbar there is a Navigation Menu from which u can access below features :
    
-   a) Covid News [You can see Health related news from verified sources no need to go anywhere].
-   b) Covid Tracker [You can see daily updated Covid stats like no. of recovered, confirmed, and Deaths].
+   a) News [You can see Health related news from verified sources no need to go anywhere].
+   b) Tracker [You can see daily updated stats like no. of recovered, confirmed, and Deaths].
    c) Emergency Helpline [You can access all state helpline numbers in India, You can call directly through the app].
    d) Requirements for needs [You can fill your details and select what are your medical needs and after pressing "Post" your request will be sent to Verified NGO's who are willing to help,They will contact you asap].
    e) Admin Portal [Not for users Only for Administration]

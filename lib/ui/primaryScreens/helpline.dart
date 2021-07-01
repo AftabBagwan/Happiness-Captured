@@ -16,7 +16,7 @@ class _HelpLineState extends State<HelpLine> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Medical Emergency Numbers',
+          'Emergency Numbers',
         ),
         backgroundColor: Color(0xfff12d4e),
       ),

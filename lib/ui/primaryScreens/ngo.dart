@@ -45,19 +45,15 @@ class NGO extends StatelessWidget {
                                 children: [
                                   Text("Name : " + data['name'],
                                       style: kNgoStyle),
+                                  Text("Age : " + data['age'],
+                                      style: kNgoStyle),
                                   Text("Mobile No : " + data['mobileNo'],
                                       style: kNgoStyle),
                                   Text("State :" + data['state'],
                                       style: kNgoStyle),
-                                  Text("Description : " + data['description'],
-                                      style: kNgoStyle),
                                   Text("City : " + data['city'],
                                       style: kNgoStyle),
-                                  Text("Age : " + data['age'],
-                                      style: kNgoStyle),
-                                  Text(
-                                      "Requirements : " +
-                                          data['selectedMedicine'],
+                                  Text("Description : " + data['description'],
                                       style: kNgoStyle),
                                 ],
                               ),

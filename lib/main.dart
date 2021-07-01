@@ -15,7 +15,6 @@ import 'package:sos/ui/primaryScreens/signin.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sos/ui/primaryScreens/signup.dart';
-import 'package:sos/ui/primaryScreens/vaccination.dart';
 
 var status;
 Future<void> main() async {
@@ -45,7 +44,6 @@ class MyApp extends StatelessWidget {
         NGO.id: (context) => NGO(),
         RequestAccepted.id: (context) => RequestAccepted(),
         ResetPass.id: (context) => ResetPass(),
-        Vaccination.id: (context) => Vaccination(),
       },
       debugShowCheckedModeBanner: false,
       home: status == false ? SignIn() : Dashboard(),

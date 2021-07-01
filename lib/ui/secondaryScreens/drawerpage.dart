@@ -8,9 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sos/ui/primaryScreens/helpline.dart';
 import 'package:sos/ui/primaryScreens/instruction.dart';
 import 'package:sos/ui/primaryScreens/locationPage.dart';
-import 'package:sos/ui/primaryScreens/ngo.dart';
 import 'package:sos/ui/primaryScreens/signin.dart';
-import 'package:sos/ui/primaryScreens/vaccination.dart';
 import '../../components/customDrawer.dart';
 import 'package:sos/components/constants.dart';
 
@@ -36,7 +34,7 @@ class _DrawerPageState extends State<DrawerPage> {
           ),
           ListTile(
             title: Text(
-              'Covid Tracker',
+              'Tracker',
               style: kDrawerStyle,
             ),
             onTap: () {
@@ -45,7 +43,7 @@ class _DrawerPageState extends State<DrawerPage> {
           ),
           ListTile(
             title: Text(
-              'Covid News',
+              'News',
               style: kDrawerStyle,
             ),
             onTap: () {
@@ -61,15 +59,15 @@ class _DrawerPageState extends State<DrawerPage> {
               Navigator.pushNamed(context, FormPage.id);
             },
           ),
-          ListTile(
-            title: Text(
-              'NGO',
-              style: kDrawerStyle,
-            ),
-            onTap: () {
-              Navigator.pushNamed(context, NGO.id);
-            },
-          ),
+          // ListTile(
+          //   title: Text(
+          //     'NGO',
+          //     style: kDrawerStyle,
+          //   ),
+          //   onTap: () {
+          //     Navigator.pushNamed(context, NGO.id);
+          //   },
+          // ),
           ListTile(
             title: Text(
               'Emergency Numbers',
@@ -118,15 +116,15 @@ class _DrawerPageState extends State<DrawerPage> {
               Navigator.pushNamed(context, Admin.id);
             },
           ),
-          ListTile(
-            title: Text(
-              'Vaccination',
-              style: kDrawerStyle,
-            ),
-            onTap: () {
-              Navigator.pushNamed(context, Vaccination.id);
-            },
-          ),
+          // ListTile(
+          //   title: Text(
+          //     'Vaccination',
+          //     style: kDrawerStyle,
+          //   ),
+          //   onTap: () {
+          //     Navigator.pushNamed(context, Vaccination.id);
+          //   },
+          // ),
           ListTile(
             title: Text(
               'Log Out',

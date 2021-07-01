@@ -22,7 +22,6 @@ class _FormPageState extends State<FormPage> {
   _FormPageState(
       {this.mobileNo,
       this.age,
-      this.hospitalName,
       this.description,
       this.stateValue,
       this.cityValue,
@@ -31,7 +30,7 @@ class _FormPageState extends State<FormPage> {
       this.selectedMedicines});
   String mobileNo;
   String age;
-  String hospitalName;
+  // String hospitalName;
   String description;
   String stateValue;
   String cityValue;
@@ -40,13 +39,13 @@ class _FormPageState extends State<FormPage> {
   String selectedMedicines;
   final _formKey = GlobalKey<FormState>();
 
-  List<String> _medicines = [
-    'Plasma',
-    'Oxygen Cylinder',
-    'Tocilizumab',
-    'Oxygen Bed',
-    'Others'
-  ];
+  // List<String> _medicines = [
+  //   'Plasma',
+  //   'Oxygen Cylinder',
+  //   'Tocilizumab',
+  //   'Oxygen Bed',
+  //   'Others'
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +70,7 @@ class _FormPageState extends State<FormPage> {
                     },
                     decoration: formFieldDecoration(
                         icon: Icons.account_circle,
-                        hintText: 'Enter patients name',
+                        hintText: 'Enter name',
                         labelText: 'Name'),
                   ),
                   SizedBox(height: 25),
@@ -143,24 +142,24 @@ class _FormPageState extends State<FormPage> {
                   SizedBox(
                     height: 25.0,
                   ),
-                  TextFormField(
-                      onChanged: (text) {
-                        hospitalName = text;
-                      },
-                      validator: (newValue) {
-                        if (newValue == null || newValue.isEmpty) {
-                          return 'Please Enter Valid data';
-                        }
-                        return null;
-                      },
-                      decoration: formFieldDecoration(
-                        icon: Icons.local_hospital,
-                        hintText: 'Name of the hospital',
-                        labelText: 'Hospital Name',
-                      )),
-                  SizedBox(
-                    height: 25.0,
-                  ),
+                  // TextFormField(
+                  //     onChanged: (text) {
+                  //       hospitalName = text;
+                  //     },
+                  //     validator: (newValue) {
+                  //       if (newValue == null || newValue.isEmpty) {
+                  //         return 'Please Enter Valid data';
+                  //       }
+                  //       return null;
+                  //     },
+                  //     decoration: formFieldDecoration(
+                  //       icon: Icons.local_hospital,
+                  //       hintText: 'Name of the hospital',
+                  //       labelText: 'Hospital Name',
+                  //     )),
+                  // SizedBox(
+                  //   height: 25.0,
+                  // ),
                   TextFormField(
                       onChanged: (text) {
                         age = text;
@@ -175,41 +174,41 @@ class _FormPageState extends State<FormPage> {
                       decoration: formFieldDecoration(
                           icon: Icons.calendar_today_sharp,
                           labelText: 'Age',
-                          hintText: 'Enter patients age')),
+                          hintText: 'Enter age')),
                   SizedBox(
                     height: 25.0,
                   ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(15.0),
-                        border: Border.all(color: Colors.black, width: 0.5)),
-                    child: DropdownButtonFormField(
-                      validator: (value) =>
-                          value == null ? 'Field required' : null,
-                      isExpanded: true,
-                      hint: Text('Please choose your requirement'),
-                      value: selectedMedicines,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedMedicines = value;
-                        });
-                      },
-                      items: _medicines.map((location) {
-                        return DropdownMenuItem(
-                          child: Text(
-                            location,
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          value: location,
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 25.0,
-                  ),
+                  // Container(
+                  //   padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                  //   decoration: BoxDecoration(
+                  //       shape: BoxShape.rectangle,
+                  //       borderRadius: BorderRadius.circular(15.0),
+                  //       border: Border.all(color: Colors.black, width: 0.5)),
+                  //   child: DropdownButtonFormField(
+                  //     validator: (value) =>
+                  //         value == null ? 'Field required' : null,
+                  //     isExpanded: true,
+                  //     hint: Text('Please choose your requirement'),
+                  //     value: selectedMedicines,
+                  //     onChanged: (value) {
+                  //       setState(() {
+                  //         selectedMedicines = value;
+                  //       });
+                  //     },
+                  //     items: _medicines.map((location) {
+                  //       return DropdownMenuItem(
+                  //         child: Text(
+                  //           location,
+                  //           style: TextStyle(color: Colors.black),
+                  //         ),
+                  //         value: location,
+                  //       );
+                  //     }).toList(),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 25.0,
+                  // ),
                   TextFormField(
                       onChanged: (text) {
                         description = text;
@@ -246,7 +245,6 @@ class _FormPageState extends State<FormPage> {
                           'state': stateValue,
                           'city': cityValue,
                           'selectedMedicine': selectedMedicines,
-                          'hospitalName': hospitalName,
                           'description': description,
                           'age': age,
                           'time': DateTime.now(),

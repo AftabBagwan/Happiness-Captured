@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sos/components/appBar.dart';
 import 'package:sos/components/constants.dart';
+import 'package:sos/ui/primaryScreens/ngo.dart';
 
 class AdminPanel extends StatelessWidget {
   static const String id = 'adminPanel';
@@ -59,7 +60,7 @@ class AdminPanel extends StatelessWidget {
                 });
               },
               child: Text(
-                'Delete NGO Request',
+                'Delete Needs Request',
                 style: kButtonTextStyle,
               ),
             ),
@@ -68,11 +69,37 @@ class AdminPanel extends StatelessWidget {
             height: 20,
           ),
           Text(
-            'NGO Request Delete Option For Form Optimisation',
+            'Needs Request Delete Option For Form Optimisation',
             style: TextStyle(
               fontWeight: FontWeight.bold,
             ),
-          )
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            color: Colors.green,
+            height: 50,
+            width: 300,
+            child: MaterialButton(
+              child: Text(
+                'Needs',
+                style: kButtonTextStyle,
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, NGO.id);
+              },
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Text(
+            'Needs Page',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       ),
     );
