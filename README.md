@@ -1,7 +1,8 @@
 ![Github](https://img.shields.io/badge/Language-Dart-blue?logo=Dart)
 ![Github](https://img.shields.io/badge/Language-Ruby-red?logo=Ruby)
 
-# Happiness Captured
+## Happiness Captured
+APK Link:- (https://drive.google.com/file/d/146kJozLmjLauWjMyMqYxgDT9vpq_gQq9/view?usp=sharing)
 
 ![alt text](https://github.com/AftabBagwan/Happiness-Captured/blob/master/readme-images/hc_poster.PNG?raw=true)
 
@@ -51,8 +52,6 @@ In addition to an emergency alert service,the system provides:
 ➢ Access to the helpline numbers of their respective states.
 These services can be accessed by the navigation bar.
 
-Happiness captured aims to create a platform where people in need are served 
-with help and information.
 
 # Steps to run this Application in your System:
 1)  Download `Android Studio`
@@ -70,15 +69,5 @@ with help and information.
 13) Also make sure that indentation of pubspec.yaml is proper otherwise the application lead to crash
 14) Run The Application
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Happiness captured aims to create a platform where people in need are served 
+with help and information.
