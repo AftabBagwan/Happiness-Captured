@@ -3,7 +3,7 @@
 
 # Happiness Captured
 
-![alt text](https://drive.google.com/file/d/1LYP6sgbQ1nhI38MUODfl_BznMOTh2Mey/view?usp=sharing)
+![alt text](https://github.com/AftabBagwan/Happiness-Captured/blob/master/readme-images/hc_poster.PNG?raw=true)
 
 APK Link:- (https://drive.google.com/file/d/146kJozLmjLauWjMyMqYxgDT9vpq_gQq9/view?usp=sharing)
 
