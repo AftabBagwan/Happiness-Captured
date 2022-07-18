@@ -3,6 +3,8 @@
 
 # Happiness Captured
 
+![alt text](https://drive.google.com/file/d/1LYP6sgbQ1nhI38MUODfl_BznMOTh2Mey/view?usp=sharing)
+
 APK Link:- (https://drive.google.com/file/d/146kJozLmjLauWjMyMqYxgDT9vpq_gQq9/view?usp=sharing)
 
 # Steps to run this Application in your System:
