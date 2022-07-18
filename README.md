@@ -59,7 +59,7 @@ These services can be accessed by the navigation bar.
 2)  Download `Flutter` And `Dart Plugins` In It
 3)  Setup the sdk and avd managers of android studio properly
 4)  Also download the ios or android devices in Emulator section
-5)  Copy The Clone Link `https://github.com/team5official/Womens-Health.git`
+5)  Copy The Clone Link `https://github.com/AftabBagwan/Happiness-Captured.git`
 6)  Paste it into `VCS` of Android Studio
 7)  Accept all the permissions
 8)  Open the cloned application in android studio
