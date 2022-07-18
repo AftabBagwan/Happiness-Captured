@@ -46,8 +46,11 @@ broadcasted various NGOs which will try their best to help you.
 ![](https://github.com/AftabBagwan/Happiness-Captured/blob/master/readme-images/ss3.png?raw=true)
 
 In addition to an emergency alert service,the system provides: 
+
 ➢ Updated Covid-19 news and statistics.
+
 ➢ Access to the helpline numbers of their respective states.
+
 These services can be accessed by the navigation bar.
 
 
