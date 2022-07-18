@@ -7,7 +7,7 @@
 
 APK Link:- (https://drive.google.com/file/d/146kJozLmjLauWjMyMqYxgDT9vpq_gQq9/view?usp=sharing)
 
-![alt text](https://github.com/AftabBagwan/Happiness-Captured/blob/master/readme-images/signup.png?raw=true) ![alt text](https://github.com/AftabBagwan/Happiness-Captured/blob/master/readme-images/login.png?raw=true) ![alt text](https://github.com/AftabBagwan/Happiness-Captured/blob/master/readme-images/location.png?raw=true)
+![](https://github.com/AftabBagwan/Happiness-Captured/blob/master/readme-images/signup.png?raw=true) ![](https://github.com/AftabBagwan/Happiness-Captured/blob/master/readme-images/login.png?raw=true) ![](https://github.com/AftabBagwan/Happiness-Captured/blob/master/readme-images/location.png?raw=true)
 
 
 # Steps to run this Application in your System:
