@@ -6,8 +6,6 @@ APK Link:- (https://drive.google.com/file/d/146kJozLmjLauWjMyMqYxgDT9vpq_gQq9/vi
 
 ![alt text](https://github.com/AftabBagwan/Happiness-Captured/blob/master/readme-images/hc_poster.PNG?raw=true)
 
-APK Link:- (https://drive.google.com/file/d/146kJozLmjLauWjMyMqYxgDT9vpq_gQq9/view?usp=sharing)
-
 ![](https://github.com/AftabBagwan/Happiness-Captured/blob/master/readme-images/ss1.png?raw=true)
 
 Happiness Captured app is a mobile-based information system. It is designed to cater
